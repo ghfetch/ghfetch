@@ -69,10 +69,10 @@ def image_to_ascii(url):
 def fetch_repo(info):
     return {
         'owner': info['owner'],
-        'size': info['size'],
+        # 'size': info['size'],
         'stars': info['stargazers_count'],
         'watchers': info['watchers_count'],
-        'issues': info['open_issues_count'],
+        # 'issues': info['open_issues_count'],
         'forks': info['forks_count'],
         'archived': info['archived'],
         'disabled': info['disabled'],
@@ -107,7 +107,7 @@ def fetch_main(name):
         'name': info['name'],
         'github_url': info['html_url'],
         'created_at': info['created_at'],
-        'updated_at': info['updated_at'],
+        # 'updated_at': info['updated_at'],
     }
 
     if is_repo:
@@ -117,8 +117,14 @@ def fetch_main(name):
     elif info['type'] == 'Organization':
         return generic_info
 
-def output_generator(info):
-    pass
+def output_generator(fetched_info):
+    fetched_info['image'] = image_to_ascii(fetched_info['image'])
+
+    # print(fetched_info)
+    print(fetched_info['image'])
+    print(fetched_info['followers'])
+    print(fetched_info['github_url'])
+    # print(json.decoder(fetched_info['image']))
 
 if __name__ == '__main__':
     # Api call
