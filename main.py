@@ -37,7 +37,7 @@ def image_to_ascii(url):
         file.write(img_data)
 
     with Image.open(user_img_location) as image:
-        IMAGE_WIDTH = 50
+        IMAGE_WIDTH = 25
         MULTIPLIER = 0.45 # Used to fix the image height because the characters are taller
 
         # Get initial width and height
@@ -142,5 +142,5 @@ if __name__ == '__main__':
     # print(fetch_main(name))
 
     print(image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'))
-    # print(image_to_ascii('https://avatars.githubusercontent.com/u/1024025?v=4'))
-    # print(image_to_ascii('https://avatars.githubusercontent.com/u/90156486?v=4'))
+    print(image_to_ascii('https://avatars.githubusercontent.com/u/1024025?v=4'))
+    print(image_to_ascii('https://avatars.githubusercontent.com/u/90156486?v=4'))
