@@ -77,6 +77,8 @@ def fetch_repo(info):
         'watchers': info['watchers_count'],
         'issues': info['open_issues_count'],
         'forks': info['forks_count'],
+        'archived': info['archived'],
+        'disabled': info['disabled'],
         **({'license': info['license']['name']} if info['license'] is not None else {}),
         **({'forked_parent': info['parent']['owner']['html_url']} if info['fork'] else {}),
         # TODO: Languages: like colors in neofetch, with colors and icons
