@@ -35,7 +35,6 @@ def image_to_ascii(url):
     file_name = url.split('/')[-1].split('?')[0]
     user_img_location = Path(f'{THIS_PATH}/images/{file_name}.png')
 
-    # TODO: check if content is the same, don't download
     with open(user_img_location, 'wb') as file:
         file.write(img_data)
 
@@ -49,14 +48,12 @@ def image_to_ascii(url):
 
         pixels = image.resize((new_width, int(new_height))).convert('L').getdata()
 
-        # TODO: refactor
-        new_pixels = [ASCII_CHARS[pixel//25] for pixel in pixels]
-        new_pixels = ''.join(new_pixels)
+        framed_pixels = ''.join([ASCII_CHARS[pixel//25] for pixel in pixels])
 
         # Gets all the pixels and creates a new array in which
         # each position of the array is all the pixels needed
         # to fill each column of the ascii art
-        ascii_text = [new_pixels[index:index + new_width] for index in range(0, len(new_pixels), new_width)]
+        ascii_text = [framed_pixels[index:index + new_width] for index in range(0, len(framed_pixels), new_width)]
 
     user_img_location.unlink(missing_ok=True)
 
@@ -91,7 +88,6 @@ def fetch_user(info):
         'public_gists': info['public_gists'],
         'followers': info['followers'],
         'following': info['following'],
-        # TODO: Languages: like colors in neofetch, with colors and icons
     }
 
 def fetch_organization(info):
@@ -106,7 +102,6 @@ def fetch_organization(info):
         'public_gists': info['public_gists'],
         'followers': info['followers'],
         'following': info['following'],
-        # TODO: Languages: like colors in neofetch, with colors and icons
     }
 
 
@@ -130,14 +125,15 @@ def fetch_main(name):
     elif info['type'] == 'Organization':
         return generic_info | fetch_organization(info)
 
-# def main():
-#     for line in image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'):
-#         print(colored(line, 'red'))
-
-#     print(asyncio.run(api_call()))
-
 
 if __name__ == '__main__':
+    # Api call
     name = sys.argv[1]
 
     print(fetch_main(name))
+
+
+    # Image ascii convert
+
+    # for line in image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'):
+    #     print(colored(line, 'red'))
