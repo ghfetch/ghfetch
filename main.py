@@ -9,6 +9,7 @@ import asyncio
 import aiohttp
 from PIL import Image
 from termcolor import colored
+from ascii_magic import AsciiArt
 
 THIS_PATH = Path(__file__).parent.resolve()
 
@@ -22,9 +23,7 @@ async def api_call(is_repo, name):
         http_status = res.status
 
         if http_status != 200:
-            content = await res.json()
-            return content
-            # return http_status
+            return http_status
 
         content = await res.json()
         return content
@@ -38,26 +37,37 @@ def image_to_ascii(url):
     with open(user_img_location, 'wb') as file:
         file.write(img_data)
 
-    with Image.open(user_img_location) as image:
-        width, height = image.size
-        CORRECT_WIDTH = 0.5 # Fixes aspect ratio and ascii width issues because characters are always taller than wider
+    my_art = AsciiArt.from_image(user_img_location)
+    my_art.to_terminal()
 
-        aspect_ratio = height / width
-        new_width = 75
-        new_height = aspect_ratio * new_width * CORRECT_WIDTH
+    return my_art
+    # with Image.open(user_img_location) as image:
+    #     width, height = image.size
+    #     CORRECT_WIDTH = 0.5 # Fixes aspect ratio and ascii width issues because characters are always taller than wider
 
-        pixels = image.resize((new_width, int(new_height))).convert('L').getdata()
+    #     aspect_ratio = height / width
+    #     new_width = 75
+    #     new_height = aspect_ratio * new_width * CORRECT_WIDTH
 
-        framed_pixels = ''.join([ASCII_CHARS[pixel//25] for pixel in pixels])
+    #     pixels = [pixel for pixel in image.resize((new_width, int(new_height))).getdata()]
+    #     grayscale_pixels = image.resize((new_width, int(new_height))).convert('L').getdata()
+
+
+    #     framed_pixels = ''.join([ASCII_CHARS[pixel//25] for pixel in grayscale_pixels])
 
         # Gets all the pixels and creates a new array in which
         # each position of the array is all the pixels needed
         # to fill each column of the ascii art
-        ascii_text = [framed_pixels[index:index + new_width] for index in range(0, len(framed_pixels), new_width)]
 
-    user_img_location.unlink(missing_ok=True)
+    # user_img_location.unlink(missing_ok=True)
 
-    return ascii_text
+    # colored_pixels = list(zip(framed_pixels, pixels))
+    # ascii_text = [colored_pixels[index:index + new_width] for index in range(0, len(framed_pixels), new_width)]
+
+    # print(colored_pixels)
+    # print(ascii_text)
+
+    # return ascii_text
 
 def fetch_repo(info):
     return {
@@ -110,6 +120,9 @@ def fetch_main(name):
 
     info = asyncio.run(api_call(is_repo, name))
 
+    if info in (401, 404, 429):
+        return info
+
     generic_info = {
         'name': info['name'],
         **({'type': info['type']} if not is_repo else {'type': 'repo'}),
@@ -128,12 +141,14 @@ def fetch_main(name):
 
 if __name__ == '__main__':
     # Api call
-    name = sys.argv[1]
+    # name = sys.argv[1]
 
-    print(fetch_main(name))
+    # print(fetch_main(name))
 
+    image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4')
 
     # Image ascii convert
 
     # for line in image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'):
-    #     print(colored(line, 'red'))
+    #     for char in line:
+    #         print(colored(char[0], ))
