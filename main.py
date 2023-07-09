@@ -68,9 +68,6 @@ def image_to_ascii(url):
 
 def fetch_repo(info):
     return {
-        'image': info['owner']['avatar_url'],
-        'description': info['description'],
-        'repo_website': info['homepage'],
         'owner': info['owner'],
         'size': info['size'],
         'stars': info['stargazers_count'],
@@ -85,33 +82,7 @@ def fetch_repo(info):
     }
 
 def fetch_user(info):
-    return {
-        'image': info['avatar_url'],
-        'personal_website': info['blog'],
-        'username': info['login'],
-        'company': info['company'],
-        'email': info['email'],
-        'location': info['location'],
-        'description': info['bio'],
-        'public_repos': info['public_repos'],
-        'public_gists': info['public_gists'],
-        'followers': info['followers'],
-        'following': info['following'],
-    }
-
-def fetch_organization(info):
-    return {
-        'image': info['avatar_url'],
-        'company_website': info['blog'],
-        'username': info['login'],
-        'email': info['email'],
-        'location': info['location'],
-        'description': info['bio'],
-        'public_repos': info['public_repos'],
-        'public_gists': info['public_gists'],
-        'followers': info['followers'],
-        'following': info['following'],
-    }
+    return {'company': info['company'],}
 
 def fetch_main(name):
     is_repo = '/' in name
@@ -122,8 +93,18 @@ def fetch_main(name):
         return info
 
     generic_info = {
+        **({'image': info['avatar_url']} if not is_repo else {'image': info['owner']['avatar_url']}),
+        **({'description': info['bio']} if not is_repo else {'description': info['description']}),
+        **({'website': info['blog']} if not is_repo else {'website': info['homepage']}),
+        **({'username': info['login']} if not is_repo else {}),
+        **({'email': info['email']} if not is_repo else {}),
+        **({'location': info['location']} if not is_repo else {}),
+        **({'public_repos': info['public_repos']} if not is_repo else {}),
+        **({'public_gists': info['public_gists']} if not is_repo else {}),
+        **({'followers': info['followers']} if not is_repo else {}),
+        **({'following': info['following']} if not is_repo else {}),
+        **({'type': info['type']} if not is_repo else {'type': 'Repo'}),
         'name': info['name'],
-        **({'type': info['type']} if not is_repo else {'type': 'repo'}),
         'github_url': info['html_url'],
         'created_at': info['created_at'],
         'updated_at': info['updated_at'],
@@ -134,15 +115,19 @@ def fetch_main(name):
     elif info['type'] == 'User':
         return generic_info | fetch_user(info)
     elif info['type'] == 'Organization':
-        return generic_info | fetch_organization(info)
+        return generic_info
 
+def output_generator(info):
+    pass
 
 if __name__ == '__main__':
     # Api call
-    # name = sys.argv[1]
+    name = sys.argv[1]
 
-    # print(fetch_main(name))
+    fetched_info = fetch_main(name)
 
-    print(image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'))
-    print(image_to_ascii('https://avatars.githubusercontent.com/u/1024025?v=4'))
-    print(image_to_ascii('https://avatars.githubusercontent.com/u/90156486?v=4'))
+    output_generator(fetched_info)
+
+    # print(image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'))
+    # print(image_to_ascii('https://avatars.githubusercontent.com/u/1024025?v=4'))
+    # print(image_to_ascii('https://avatars.githubusercontent.com/u/90156486?v=4'))
