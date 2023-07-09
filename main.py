@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import requests
 from pathlib import Path
@@ -10,21 +11,26 @@ from PIL import Image
 from termcolor import colored
 
 THIS_PATH = Path(__file__).parent.resolve()
-ASCII_CHARS = ["B","S","#","&","@","$","%","*","!",":","."]
 
-async def api_call():
+async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
+    ENDPOINT_URL = 'repos/' if is_repo else 'users/'
 
-    async with aiohttp.request('GET', BASE_URL) as res:
+    URL = f'{BASE_URL}{ENDPOINT_URL}{name}'
+
+    async with aiohttp.request('GET', URL) as res:
         http_status = res.status
 
         if http_status != 200:
-            return http_status
+            content = await res.json()
+            return content
+            # return http_status
 
         content = await res.json()
         return content
 
 def image_to_ascii(url):
+    ASCII_CHARS = ['B','S','#','&','@','$','%','*','!',':','.']
     img_data = requests.get(url).content
     file_name = url.split('/')[-1].split('?')[0]
     user_img_location = Path(f'{THIS_PATH}/images/{file_name}.png')
@@ -56,13 +62,82 @@ def image_to_ascii(url):
 
     return ascii_text
 
+def fetch_repo(info):
+    return {
+        'image': info['owner']['avatar_url'],
+        'description': info['description'],
+        'repo_website': info['homepage'],
+        'owner': info['owner'],
+        'size': info['size'],
+        'stars': info['stargazers_count'],
+        'watchers': info['watchers_count'],
+        'issues': info['open_issues_count'],
+        'forks': info['forks_count'],
+        **({'license': info['license']['name']} if info['license'] is not None else {}),
+        **({'forked_parent': info['parent']['owner']['html_url']} if info['fork'] else {}),
+        # TODO: Languages: like colors in neofetch, with colors and icons
+    }
 
-def main():
-    for line in image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'):
-        print(colored(line, 'red'))
+def fetch_user(info):
+    return {
+        'image': info['avatar_url'],
+        'personal_website': info['blog'],
+        'username': info['login'],
+        'company': info['company'],
+        'email': info['email'],
+        'location': info['c'],
+        'description': info['bio'],
+        'public_repos': info['public_repos'],
+        'public_gists': info['public_gists'],
+        'followers': info['followers'],
+        'following': info['following'],
+        # TODO: Languages: like colors in neofetch, with colors and icons
+    }
 
-    print(asyncio.run(api_call()))
+def fetch_organization(info):
+    return {
+        'image': info['avatar_url'],
+        'company_website': info['blog'],
+        'username': info['login'],
+        'email': info['email'],
+        'location': info['location'],
+        'description': info['bio'],
+        'public_repos': info['public_repos'],
+        'public_gists': info['public_gists'],
+        'followers': info['followers'],
+        'following': info['following'],
+        # TODO: Languages: like colors in neofetch, with colors and icons
+    }
+
+
+def fetch_main(name):
+    is_repo = '/' in name
+
+    info = asyncio.run(api_call(is_repo, name))
+
+    generic_info = {
+        'name': info['name'],
+        **({'type': info['type']} if not is_repo else {'type': 'repo'}),
+        'github_url': info['html_url'],
+        'created_at': info['created_at'],
+        'updated_at': info['updated_at'],
+    }
+
+    if is_repo:
+        return generic_info | fetch_repo(info)
+    elif info['type'] == 'User':
+        return generic_info | fetch_user(info)
+    elif info['type'] == 'Organization':
+        return generic_info | fetch_organization(info)
+
+# def main():
+#     for line in image_to_ascii('https://avatars.githubusercontent.com/u/110683019?v=4'):
+#         print(colored(line, 'red'))
+
+#     print(asyncio.run(api_call()))
 
 
 if __name__ == '__main__':
-    main()
+    name = sys.argv[1]
+
+    print(fetch_main(name))
