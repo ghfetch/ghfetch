@@ -82,7 +82,7 @@ def fetch_user(info):
         'username': info['login'],
         'company': info['company'],
         'email': info['email'],
-        'location': info['c'],
+        'location': info['location'],
         'description': info['bio'],
         'public_repos': info['public_repos'],
         'public_gists': info['public_gists'],
