@@ -182,8 +182,8 @@ def print_output(fetched_info):
 
 def main():
     # API call
-    if len(sys.argv) == 1:
-        return print('One argument must be provided')
+    if len(sys.argv) != 2:
+        return print('Only one argument must be provided')
 
     name = sys.argv[1]
 
