@@ -27,14 +27,13 @@ async def api_call(is_repo, name):
 
 def fetch_repo(info):
     return {
-        'owner': info['owner'],
+        'owner': info['owner']['login'],
         'stars': info['stargazers_count'],
         'watchers': info['watchers_count'],
         'forks': info['forks_count'],
         'archived': info['archived'],
-        'disabled': info['disabled'],
-        **({'license': info['license']['name']} if info['license'] is not None else {}),
-        **({'forked_parent': info['parent']['owner']['html_url']} if info['fork'] else {}),
+        **({'license': info['license']['name']} if info['license'] is not None else {'license': None}),
+        **({'forked_parent': info['parent']['html_url']} if info['fork'] else {}),
         # 'size': info['size'],
         # 'issues': info['open_issues_count'],
 
@@ -124,29 +123,58 @@ def image_to_unicode(url):
 def print_output(fetched_info):
     COLOR_TITLE = '#068FFF'
     COLOR_TEXT = '#EEEEEE'
+    COLOR_ARCHIVED = '#F48024'
+    n = 0 # Where n is the row where to start
+
     output = image_to_unicode(fetched_info['image'])
 
+
     if fetched_info['type'] == 'User':
-        output[1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
-        output[2] += f'[{COLOR_TEXT}]----------------------------------[/{COLOR_TEXT}]'
-        output[3] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
-        output[4] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"]}[/{COLOR_TEXT}]'
-        output[5] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
-        output[6] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
-        output[7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
-        output[8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
-        output[9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
-        output[10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
-        output[11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
-        output[12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
-        output[13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
+        output[n] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
+        output[n + 1] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["username"]) + 2)}[/{COLOR_TEXT}]'
+        output[n + 2] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
+        output[n + 3] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"][:50] + "..." if len(fetched_info["description"]) > 50 else fetched_info["description"]}[/{COLOR_TEXT}]'
+        output[n + 4] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
+        output[n + 5] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
+        output[n + 6] += f'[{COLOR_TITLE}]Company: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["company"]}[/{COLOR_TEXT}]'
+        output[n + 7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
+        output[n + 8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
+        output[n + 9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
+        output[n + 10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
+        output[n + 11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
+        output[n + 12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
+        output[n + 13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
 
     elif fetched_info['type'] == 'Organization':
-        pass
+        output[n + 1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
+        output[n + 2] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["username"]) + 2)}[/{COLOR_TEXT}]'
+        output[n + 3] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
+        output[n + 4] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"]}[/{COLOR_TEXT}]'
+        output[n + 5] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
+        output[n + 6] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
+        output[n + 7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
+        output[n + 8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
+        output[n + 9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
+        output[n + 10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
+        output[n + 11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
+        output[n + 12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
+        output[n + 13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
 
     elif fetched_info['type'] == 'Repo':
-        pass
-
+        output[n + 1] += f'[{COLOR_ARCHIVED}][Archived][/{COLOR_ARCHIVED}]' if fetched_info['archived'] else ''
+        output[n + 1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
+        output[n + 2] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["name"]) + 2)}[/{COLOR_TEXT}]'
+        if 'forked_parent' in fetched_info:
+            output[n + 3] += f'[{COLOR_TITLE}]Forked from: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["forked_parent"]}[/{COLOR_TEXT}]'
+            n += 1
+        output[n + 3] += f'[{COLOR_TITLE}]Owner: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["owner"]}[/{COLOR_TEXT}]'
+        output[n + 4] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"]}[/{COLOR_TEXT}]'
+        output[n + 5] += f'[{COLOR_TITLE}]License: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["license"]}[/{COLOR_TEXT}]'
+        output[n + 6] += f'[{COLOR_TITLE}]Stars: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["stars"]}[/{COLOR_TEXT}]'
+        output[n + 7] += f'[{COLOR_TITLE}]Watchers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["watchers"]}[/{COLOR_TEXT}]'
+        output[n + 8] += f'[{COLOR_TITLE}]Forks: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["forks"]}[/{COLOR_TEXT}]'
+        output[n + 9] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
+        output[n + 10] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
 
     for line in output:
         print(line)
