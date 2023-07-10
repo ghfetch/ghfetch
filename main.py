@@ -188,11 +188,11 @@ def main():
 
     # API call
     fetched_info = fetch_main(name)
-    if len(fetched_info) == 401:
+    if fetched_info == 401:
         return print("You don't have access to this")
-    if len(fetched_info) == 404:
+    if fetched_info == 404:
         return print("The passed parameter it's not an existing User / Company / repo")
-    if len(fetched_info) == 429:
+    if fetched_info == 429:
         return print("This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee\u2615")
 
     print_output(fetched_info)
