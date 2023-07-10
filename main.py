@@ -81,7 +81,7 @@ def rgb_to_hex(r, g, b):
     return f'#{r:02x}{g:02x}{b:02x}'
 
 def image_to_unicode(url):
-    IMAGE_WIDTH = 40
+    IMAGE_WIDTH = 35
     COLORED_CHAR_LENGTH = 20 # Number of characters needed in raw to print a colored unicode character [#012345]█[/#012345]
     UNICODE_BLOCK_CHAR = '\u2588'
 
@@ -122,15 +122,33 @@ def image_to_unicode(url):
         return unicode_per_rows
 
 def print_output(fetched_info):
-    fetched_info['image'] = image_to_unicode(fetched_info['image'])
+    COLOR_TITLE = '#068FFF'
+    COLOR_TEXT = '#EEEEEE'
+    output = image_to_unicode(fetched_info['image'])
 
-    fetched_info['image'][0] += '1'
-    fetched_info['image'][1] += '2'
-    fetched_info['image'][2] += '3'
-    fetched_info['image'][3] += '4'
-    fetched_info['image'][4] += '5'
+    if fetched_info['type'] == 'User':
+        output[1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
+        output[2] += f'[{COLOR_TEXT}]----------------------------------[/{COLOR_TEXT}]'
+        output[3] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
+        output[4] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"]}[/{COLOR_TEXT}]'
+        output[5] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
+        output[6] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
+        output[7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
+        output[8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
+        output[9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
+        output[10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
+        output[11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
+        output[12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
+        output[13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
 
-    for line in fetched_info['image']:
+    elif fetched_info['type'] == 'Organization':
+        pass
+
+    elif fetched_info['type'] == 'Repo':
+        pass
+
+
+    for line in output:
         print(line)
 
 
