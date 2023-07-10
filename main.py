@@ -9,7 +9,6 @@ from rich import print
 from PIL import Image
 
 THIS_PATH = Path(__file__).parent.resolve()
-IMAGE_WIDTH = 40
 
 async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
@@ -82,6 +81,8 @@ def rgb_to_hex(r, g, b):
     return f'#{r:02x}{g:02x}{b:02x}'
 
 def image_to_unicode(url):
+    IMAGE_WIDTH = 40
+    COLORED_CHAR_LENGTH = 20 # Number of characters needed in raw to print a colored unicode character [#012345]█[/#012345]
     UNICODE_BLOCK_CHAR = '\u2588'
 
     file_name = url.split('/')[-1].split('?')[0]
@@ -104,37 +105,33 @@ def image_to_unicode(url):
 
         pixel_values = image.resize((IMAGE_WIDTH, IMAGE_HEIGHT)).getdata()
 
-        unicode_text = ''
-        for index, character in enumerate(pixel_values):
+        line = ''
+        unicode_per_rows = []
+
+        for char in pixel_values:
             # Retrieve all RGB values and discard alpha channel (rich doesn't support alpha channel)
-            r, g, b = character if len(character) == 3 else character[:-1]
-
-            # Adds new line when the index reaches the width limit
-            if (index != 0) and (index % IMAGE_WIDTH == 0):
-                unicode_text += '\n'
-
+            r, g, b = char if len(char) == 3 else char[:-1]
             hex = rgb_to_hex(r, g, b)
 
-            unicode_text += f'[{hex}]{UNICODE_BLOCK_CHAR}[/{hex}]'
+            line += f'[{hex}]{UNICODE_BLOCK_CHAR}[/{hex}]'
 
-        user_img_location.unlink(missing_ok=True)
+            if len(line) == COLORED_CHAR_LENGTH * IMAGE_WIDTH:
+                unicode_per_rows.append(f'{line}\t')
+                line = ''
 
-        return unicode_text
+        return unicode_per_rows
 
-def output_generator(fetched_info):
-    COLORED_CHAR_LENGTH = 20
-
+def print_output(fetched_info):
     fetched_info['image'] = image_to_unicode(fetched_info['image'])
 
-    formatted_output = ''
-    for index, char in enumerate(fetched_info['image']):
-        formatted_output += char
+    fetched_info['image'][0] += '1'
+    fetched_info['image'][1] += '2'
+    fetched_info['image'][2] += '3'
+    fetched_info['image'][3] += '4'
+    fetched_info['image'][4] += '5'
 
-        # Checks if the width limit is reached to append text
-        if index / COLORED_CHAR_LENGTH == IMAGE_WIDTH:
-            formatted_output = formatted_output.rstrip() + '\t\tprueba\n'
-
-    return formatted_output
+    for line in fetched_info['image']:
+        print(line)
 
 
 def main():
@@ -146,7 +143,7 @@ def main():
 
     fetched_info = fetch_main(name)
 
-    print(output_generator(fetched_info))
+    print_output(fetched_info)
 
     # In case rate limit is exceeded:
     # https://avatars.githubusercontent.com/u/110683019?v=4
