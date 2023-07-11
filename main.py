@@ -124,57 +124,68 @@ def print_output(fetched_info):
     COLOR_TITLE = '#068FFF'
     COLOR_TEXT = '#EEEEEE'
     COLOR_ARCHIVED = '#F48024'
+
+    def title(text):
+        return f'[{COLOR_TITLE}]{text}[/{COLOR_TITLE}]'
+
+    def text(text):
+        return f'[{COLOR_TEXT}]{text}[/{COLOR_TEXT}]'
+
+    def archived(text):
+        return f'[{COLOR_ARCHIVED}]{text}[/{COLOR_ARCHIVED}]'
+
     n = 0 # Where n is the row where to start
 
     output = image_to_unicode(fetched_info['image'])
 
-
     if fetched_info['type'] == 'User':
-        output[n] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
-        output[n + 1] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["username"]) + 2)}[/{COLOR_TEXT}]'
-        output[n + 2] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
-        output[n + 3] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"]}[/{COLOR_TEXT}]'
-        output[n + 4] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
-        output[n + 5] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
-        output[n + 6] += f'[{COLOR_TITLE}]Company: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["company"]}[/{COLOR_TEXT}]'
-        output[n + 7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
-        output[n + 8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
-        output[n + 9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
-        output[n + 10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
-        output[n + 11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
-        output[n + 12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
-        output[n + 13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
+        output[n]      += title(fetched_info["username"])
+        output[n + 1]  += text('-' * (len(fetched_info['username'])))
+        output[n + 2]  += f'{title("Name")}:             {text(fetched_info["name"])}'
+        output[n + 3]  += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 4]  += f'{title("Location")}:         {text(fetched_info["location"])}'
+        output[n + 5]  += f'{title("Email")}:            {text(fetched_info["email"])}'
+        output[n + 6]  += f'{title("Company")}:          {text(fetched_info["company"])}'
+        output[n + 7]  += f'{title("Personal Website")}: {text(fetched_info["website"])}'
+        output[n + 8]  += f'{title("Following")}:        {text(fetched_info["following"])}'
+        output[n + 9]  += f'{title("Followers")}:        {text(fetched_info["followers"])}'
+        output[n + 10] += f'{title("Public repos")}:     {text(fetched_info["public_repos"])}'
+        output[n + 11] += f'{title("Public gists")}:     {text(fetched_info["public_gists"])}'
+        output[n + 12] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
+        output[n + 13] += f'{title("Github URL")}:       {text(fetched_info["github_url"])}'
 
     elif fetched_info['type'] == 'Organization':
-        output[n + 1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["username"]}[/{COLOR_TEXT}]'
-        output[n + 2] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["username"]) + 2)}[/{COLOR_TEXT}]'
-        output[n + 3] += f'[{COLOR_TITLE}]Name: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
-        output[n + 3] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"]}[/{COLOR_TEXT}]'
-        output[n + 5] += f'[{COLOR_TITLE}]Location: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["location"]}[/{COLOR_TEXT}]'
-        output[n + 6] += f'[{COLOR_TITLE}]E-mail: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["email"]}[/{COLOR_TEXT}]'
-        output[n + 7] += f'[{COLOR_TITLE}]Personal Website: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["website"]}[/{COLOR_TEXT}]'
-        output[n + 8] += f'[{COLOR_TITLE}]Following: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["following"]}[/{COLOR_TEXT}]'
-        output[n + 9] += f'[{COLOR_TITLE}]Followers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["followers"]}[/{COLOR_TEXT}]'
-        output[n + 10] += f'[{COLOR_TITLE}]Public repos: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_repos"]}[/{COLOR_TEXT}]'
-        output[n + 11] += f'[{COLOR_TITLE}]Public gists: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["public_gists"]}[/{COLOR_TEXT}]'
-        output[n + 12] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
-        output[n + 13] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
+        output[n + 1]  += title(fetched_info["username"])
+        output[n + 2]  += text('-' * (len(fetched_info['username'])))
+        output[n + 3]  += f'{title("Name")}:             {text(fetched_info["name"])}'
+        output[n + 4]  += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 5]  += f'{title("Location")}:         {text(fetched_info["location"])}'
+        output[n + 6]  += f'{title("E-mail")}:           {text(fetched_info["email"])}'
+        output[n + 7]  += f'{title("Personal Website")}: {text(fetched_info["website"])}'
+        output[n + 8]  += f'{title("Following")}:        {text(fetched_info["following"])}'
+        output[n + 9]  += f'{title("Followers")}:        {text(fetched_info["followers"])}'
+        output[n + 10] += f'{title("Public repos")}:     {text(fetched_info["public_repos"])}'
+        output[n + 11] += f'{title("Public gists")}:     {text(fetched_info["public_gists"])}'
+        output[n + 12] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
+        output[n + 13] += f'{title("Github URL")}:       {text(fetched_info["github_url"])}'
 
     elif fetched_info['type'] == 'Repo':
-        output[n + 1] += f'[{COLOR_ARCHIVED}][Archived][/{COLOR_ARCHIVED}]' if fetched_info['archived'] else ''
-        output[n + 1] += f'[{COLOR_TITLE}]{fetched_info["type"]}: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["name"]}[/{COLOR_TEXT}]'
-        output[n + 2] += f'[{COLOR_TEXT}]{"-" * (len(fetched_info["type"]) + len(fetched_info["name"]) + 2)}[/{COLOR_TEXT}]'
+        output[n + 1] += archived('[Archived] ') if fetched_info['archived'] else ''
+        output[n + 1] += title(f'{fetched_info["owner"]}/{fetched_info["name"]}')
+        output[n + 2] += text('-' * (len(f'{fetched_info["owner"]}/{fetched_info["name"]}') if not fetched_info['archived'] else len(f'{fetched_info["owner"]}/{fetched_info["name"]}') + len('[Archived] ')))
+
         if 'forked_parent' in fetched_info:
-            output[n + 3] += f'[{COLOR_TITLE}]Forked from: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["forked_parent"]}[/{COLOR_TEXT}]'
+            output[n + 3] += f'{title("Forked from")}: {text(fetched_info["forked_parent"])}'
             n += 1
-        output[n + 3] += f'[{COLOR_TITLE}]Owner: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["owner"]}[/{COLOR_TEXT}]'
-        output[n + 4] += f'[{COLOR_TITLE}]Description: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"]}[/{COLOR_TEXT}]'
-        output[n + 5] += f'[{COLOR_TITLE}]License: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["license"]}[/{COLOR_TEXT}]'
-        output[n + 6] += f'[{COLOR_TITLE}]Stars: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["stars"]}[/{COLOR_TEXT}]'
-        output[n + 7] += f'[{COLOR_TITLE}]Watchers: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["watchers"]}[/{COLOR_TEXT}]'
-        output[n + 8] += f'[{COLOR_TITLE}]Forks: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["forks"]}[/{COLOR_TEXT}]'
-        output[n + 9] += f'[{COLOR_TITLE}]Joined at: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["created_at"]}[/{COLOR_TEXT}]'
-        output[n + 10] += f'[{COLOR_TITLE}]Github URL: [/{COLOR_TITLE}][{COLOR_TEXT}]{fetched_info["github_url"]}[/{COLOR_TEXT}]'
+
+        output[n + 3] += f'{title("Owner")}:            {text(fetched_info["owner"])}'
+        output[n + 4] += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 5] += f'{title("License")}:          {text(fetched_info["license"])}'
+        output[n + 6] += f'{title("Stars")}:            {text(fetched_info["stars"])}'
+        output[n + 7] += f'{title("Watchers")}:         {text(fetched_info["watchers"])}'
+        output[n + 8] += f'{title("Forks")}:            {text(fetched_info["forks"])}'
+        output[n + 9] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
+        output[n + 10] += f'{title("Github URL")}:      {text(fetched_info["github_url"])}'
 
     for line in output:
         print(line)
