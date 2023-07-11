@@ -65,7 +65,7 @@ def fetch_main(name):
         **({'type': info['type']} if not is_repo else {'type': 'Repo'}),
         'name': info['name'],
         'github_url': info['html_url'],
-        'created_at': info['created_at'],
+        'created_at': info['created_at'][:10]
         # 'updated_at': info['updated_at'],
     }
 
