@@ -144,33 +144,33 @@ def print_output(fetched_info):
     if fetched_info['type'] == 'User':
         output[n]      += title(fetched_info["username"])
         output[n + 1]  += text('-' * (len(fetched_info['username'])))
-        output[n + 2]  += f'{title("Name")}:             {text(fetched_info["name"])}'
-        output[n + 3]  += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
-        output[n + 4]  += f'{title("Location")}:         {text(fetched_info["location"])}'
-        output[n + 5]  += f'{title("Email")}:            {text(fetched_info["email"])}'
-        output[n + 6]  += f'{title("Company")}:          {text(fetched_info["company"])}'
+        output[n + 2]  += f'{title("Name")}: {text(fetched_info["name"])}'
+        output[n + 3]  += f'{title("Description")}: {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 4]  += f'{title("Location")}: {text(fetched_info["location"])}'
+        output[n + 5]  += f'{title("Email")}: {text(fetched_info["email"])}'
+        output[n + 6]  += f'{title("Company")}: {text(fetched_info["company"])}'
         output[n + 7]  += f'{title("Personal Website")}: {text(fetched_info["website"])}'
-        output[n + 8]  += f'{title("Following")}:        {text(fetched_info["following"])}'
-        output[n + 9]  += f'{title("Followers")}:        {text(fetched_info["followers"])}'
-        output[n + 10] += f'{title("Public repos")}:     {text(fetched_info["public_repos"])}'
-        output[n + 11] += f'{title("Public gists")}:     {text(fetched_info["public_gists"])}'
-        output[n + 12] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
-        output[n + 13] += f'{title("Github URL")}:       {text(fetched_info["github_url"])}'
+        output[n + 8]  += f'{title("Following")}: {text(fetched_info["following"])}'
+        output[n + 9]  += f'{title("Followers")}: {text(fetched_info["followers"])}'
+        output[n + 10] += f'{title("Public repos")}: {text(fetched_info["public_repos"])}'
+        output[n + 11] += f'{title("Public gists")}: {text(fetched_info["public_gists"])}'
+        output[n + 12] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
+        output[n + 13] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
 
     elif fetched_info['type'] == 'Organization':
         output[n + 1]  += title(fetched_info["username"])
         output[n + 2]  += text('-' * (len(fetched_info['username'])))
-        output[n + 3]  += f'{title("Name")}:             {text(fetched_info["name"])}'
-        output[n + 4]  += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
-        output[n + 5]  += f'{title("Location")}:         {text(fetched_info["location"])}'
-        output[n + 6]  += f'{title("E-mail")}:           {text(fetched_info["email"])}'
+        output[n + 3]  += f'{title("Name")}: {text(fetched_info["name"])}'
+        output[n + 4]  += f'{title("Description")}: {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 5]  += f'{title("Location")}: {text(fetched_info["location"])}'
+        output[n + 6]  += f'{title("E-mail")}: {text(fetched_info["email"])}'
         output[n + 7]  += f'{title("Personal Website")}: {text(fetched_info["website"])}'
-        output[n + 8]  += f'{title("Following")}:        {text(fetched_info["following"])}'
-        output[n + 9]  += f'{title("Followers")}:        {text(fetched_info["followers"])}'
-        output[n + 10] += f'{title("Public repos")}:     {text(fetched_info["public_repos"])}'
-        output[n + 11] += f'{title("Public gists")}:     {text(fetched_info["public_gists"])}'
-        output[n + 12] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
-        output[n + 13] += f'{title("Github URL")}:       {text(fetched_info["github_url"])}'
+        output[n + 8]  += f'{title("Following")}: {text(fetched_info["following"])}'
+        output[n + 9]  += f'{title("Followers")}: {text(fetched_info["followers"])}'
+        output[n + 10] += f'{title("Public repos")}:{text(fetched_info["public_repos"])}'
+        output[n + 11] += f'{title("Public gists")}:{text(fetched_info["public_gists"])}'
+        output[n + 12] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
+        output[n + 13] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
 
     elif fetched_info['type'] == 'Repo':
         output[n + 1] += archived('[Archived] ') if fetched_info['archived'] else ''
@@ -181,14 +181,14 @@ def print_output(fetched_info):
             output[n + 3] += f'{title("Forked from")}: {text(fetched_info["forked_parent"])}'
             n += 1
 
-        output[n + 3] += f'{title("Owner")}:            {text(fetched_info["owner"])}'
-        output[n + 4] += f'{title("Description")}:      {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
-        output[n + 5] += f'{title("License")}:          {text(fetched_info["license"])}'
-        output[n + 6] += f'{title("Stars")}:            {text(fetched_info["stars"])}'
-        output[n + 7] += f'{title("Watchers")}:         {text(fetched_info["watchers"])}'
-        output[n + 8] += f'{title("Forks")}:            {text(fetched_info["forks"])}'
-        output[n + 9] += f'{title("Joined at")}:        {text(fetched_info["created_at"])}'
-        output[n + 10] += f'{title("Github URL")}:      {text(fetched_info["github_url"])}'
+        output[n + 3] += f'{title("Owner")}: {text(fetched_info["owner"])}'
+        output[n + 4] += f'{title("Description")}: {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 5] += f'{title("License")}: {text(fetched_info["license"])}'
+        output[n + 6] += f'{title("Stars")}: {text(fetched_info["stars"])}'
+        output[n + 7] += f'{title("Watchers")}: {text(fetched_info["watchers"])}'
+        output[n + 8] += f'{title("Forks")}: {text(fetched_info["forks"])}'
+        output[n + 9] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
+        output[n + 10] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
 
     for line in output:
         print(line)
