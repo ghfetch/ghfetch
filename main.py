@@ -27,9 +27,6 @@ async def api_call(is_repo, name):
         return content
 
 async def create_languages_stat(url):
-    def colorate(text, color):
-        return f'[{color}]{text}[/{color}]'
-
     async with aiohttp.request('GET', url) as res:
         http_status = res.status
 
@@ -210,13 +207,13 @@ def print_output(fetched_info):
         output[n + 8] += f'{title("Forks")}: {text(fetched_info["forks"])}'
         output[n + 9] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
         output[n + 10] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
-        output[n + 11] += f'{title("Langs")}:'
+        output[n + 11] += f'{title("Langs")}: ' if len(fetched_info['languages'].items()) > 0 else ''
 
         if len(fetched_info["languages"].items()) > 2:
-            output[n + 12] += f'{", ".join([(f"{title(k)} {text(v)}") for k, v in fetched_info["languages"].items()][:2])}, '
-            output[n + 13] += ', '.join([(f"{title(k)} {text(v)}") for k, v in fetched_info["languages"].items()][2:])
+            output[n + 12] += f'{", ".join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()][:2])}, '
+            output[n + 13] += ', '.join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()][2:])
         else:
-            output[n + 12] += ', '.join([(f"{title(k)} {text(v)}") for k, v in fetched_info["languages"].items()])
+            output[n + 12] += ', '.join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()])
 
     for line in output:
         print(line)
