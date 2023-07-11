@@ -69,12 +69,15 @@ def fetch_main(name):
         # 'updated_at': info['updated_at'],
     }
 
+    def correct_formatting(dict):
+        return {k:v if v != '' else None for k, v in dict.items()}
+
     if is_repo:
-        return generic_info | fetch_repo(info)
+        return correct_formatting(generic_info | fetch_repo(info))
     elif info['type'] == 'User':
-        return generic_info | fetch_user(info)
+        return correct_formatting(generic_info | fetch_user(info))
     elif info['type'] == 'Organization':
-        return generic_info
+        return correct_formatting(generic_info)
 
 def rgb_to_hex(r, g, b):
     return f'#{r:02x}{g:02x}{b:02x}'
