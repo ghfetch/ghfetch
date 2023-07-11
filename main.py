@@ -87,8 +87,7 @@ def fetch_main(name):
         **({'type': info['type']} if not is_repo else {'type': 'Repo'}),
         'name': info['name'],
         'github_url': info['html_url'],
-        'created_at': info['created_at'][:10]
-        # 'updated_at': info['updated_at'],
+        'created_at': info['created_at'][:10],
     }
 
     def correct_formatting(dict):
@@ -212,6 +211,7 @@ def print_output(fetched_info):
         output[n + 9] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
         output[n + 10] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
         output[n + 11] += f'{title("Langs")}:'
+
         if len(fetched_info["languages"].items()) > 2:
             output[n + 12] += f'{", ".join([(f"{title(k)} {text(v)}") for k, v in fetched_info["languages"].items()][:2])}, '
             output[n + 13] += ', '.join([(f"{title(k)} {text(v)}") for k, v in fetched_info["languages"].items()][2:])
@@ -238,12 +238,6 @@ def main():
         return print("This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee\u2615")
 
     print_output(fetched_info)
-
-    # In case rate limit is exceeded:
-    # https://avatars.githubusercontent.com/u/110683019?v=4
-    # https://avatars.githubusercontent.com/u/1024025?v=4
-    # https://avatars.githubusercontent.com/u/90156486?v=4
-
 
 if __name__ == '__main__':
     main()
