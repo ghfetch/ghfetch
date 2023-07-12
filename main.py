@@ -106,7 +106,7 @@ def image_to_unicode(url):
     UNICODE_BLOCK_CHAR = '\u2588'
 
     file_name = url.split('/')[-1].split('?')[0]
-    user_img_location = Path(f'{THIS_PATH}/images/{file_name}.png')
+    user_img_location = Path(f'{THIS_PATH}/{file_name}.png')
 
     img_data = requests.get(url).content
 
@@ -138,6 +138,8 @@ def image_to_unicode(url):
             if len(line) == COLORED_CHAR_LENGTH * IMAGE_WIDTH:
                 unicode_per_rows.append(f'{line}\t')
                 line = ''
+
+        Path.unlink(user_img_location, missing_ok=True)
 
         return unicode_per_rows
 
