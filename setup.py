@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='ghfetch-pip',
-      version='1.0.1',
+      version='1.1.0',
       description='CLI tool to fetch GitHub information',
       author='Nullgaro, Icutum',
       author_email='ghfetch.contact@gmail.com',
@@ -12,7 +12,7 @@ setup(name='ghfetch-pip',
       install_requires=['pillow', 'aiohttp', 'rich'],
       entry_points={
         'console_scripts': [
-            'ghfetch=ghfetch.ghfetch:main'
+            'ghfetch=ghfetch.main:main'
         ]
     },
     )
