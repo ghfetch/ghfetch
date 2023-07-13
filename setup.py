@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='ghfetch-pip',
-      version='1.2.1',
+      version='1.2.5',
       description='CLI tool to fetch GitHub information',
       author='Nullgaro, Icutum',
       author_email='ghfetch.contact@gmail.com',

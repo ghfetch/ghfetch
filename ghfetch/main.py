@@ -17,7 +17,7 @@ THIS_PATH = Path(__file__).parent.resolve()
 def startup():
     tmp_folder = Path(f'{HOME_PATH}/.ghfetch/tmp')
 
-    Path.mkdir(tmp_folder, parents=True, exist_ok=True)
+    Path(tmp_folder).mkdir(parents=True, exist_ok=True)
 
 async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
