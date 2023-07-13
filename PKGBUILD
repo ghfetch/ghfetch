@@ -1,4 +1,5 @@
-# Maintainer: Daniel Milenov, Mario Sánchez <ghfetch.contact@gmail.com>
+# Maintainer: Daniel Milenov <icutum@gmail.com>
+# Contributor: Mario Sánchez <nullgaro@gmail.com>
 pkgname='ghfetch'
 pkgver='1.2.5'
 pkgrel=1
