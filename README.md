@@ -7,11 +7,17 @@ Upon execution, the script displays on the terminal relevant information, like t
 
 ## Installation
 
-<!-- ### Package manager
+### Package manager
+
 **Arch Linux:**
 ```sh
 yay -S ghfetch
-``` -->
+
+**PIP:**
+```sh
+pip install ghfetch-pip
+```
+```
 
 ### Manual installation
 ```sh
@@ -63,9 +69,9 @@ ghfetch ghfetch/ghfetch
 
 ### Package upload 📦
 
-- [ ] Yay
+- [X] Yay
 - [ ] Apt
-- [ ] Pip
+- [X] Pip
 - [ ] Snap
 - [ ] DNF/Yum
 - [ ] Brew
@@ -75,3 +81,7 @@ ghfetch ghfetch/ghfetch
 
 ### Wishlist 🥺
 - [ ] Pacman
+
+
+## People 👨‍💻
+This project was developed with ❤️ by [Nullgaro](https://github.com/nullgaro) and [Icutum](https://github.com/icutum).
