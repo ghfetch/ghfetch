@@ -11,7 +11,13 @@ import aiohttp
 from rich import print
 from PIL import Image
 
+HOME_PATH = Path().home()
 THIS_PATH = Path(__file__).parent.resolve()
+
+def startup():
+    tmp_folder = Path(f'{HOME_PATH}/.ghfetch/tmp')
+
+    Path.mkdir(tmp_folder, parents=True, exist_ok=True)
 
 async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
@@ -55,10 +61,6 @@ def fetch_repo(info):
         **({'license': info['license']['name']} if info['license'] is not None else {'license': None}),
         **({'forked_parent': info['parent']['html_url']} if info['fork'] else {}),
         'languages': asyncio.run(create_languages_stat(info['languages_url'])),
-        # 'size': info['size'],
-        # 'issues': info['open_issues_count'],
-
-        # TODO: Languages: like colors in neofetch, with colors and icons, max 4 lines of height
     }
 
 def fetch_user(info):
@@ -108,7 +110,7 @@ def image_to_unicode(url):
     UNICODE_BLOCK_CHAR = '\u2588'
 
     file_name = url.split('/')[-1].split('?')[0]
-    user_img_location = Path(f'{THIS_PATH}/{file_name}.png')
+    user_img_location = Path(f'{HOME_PATH}/.ghfetch/tmp/{file_name}.png')
 
     img_data = requests.get(url).content
 
