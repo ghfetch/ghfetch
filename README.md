@@ -12,11 +12,11 @@ Upon execution, the script displays on the terminal relevant information, like t
 **Arch Linux:**
 ```sh
 yay -S ghfetch
+```
 
 **PIP:**
 ```sh
 pip install ghfetch-pip
-```
 ```
 
 ### Manual installation
