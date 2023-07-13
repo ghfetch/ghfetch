@@ -8,7 +8,7 @@ url="https://github.com/ghfetch/ghfetch"
 license=('MIT')
 depends=('python' 'python-aiohttp' 'python-requests'  'python-pillow' 'python-rich')
 makedepends=('git')
-source=('ghfetch::git://github.com/ghfetch/ghfetch.git')
+source=('ghfetch::https://github.com/ghfetch/ghfetch.git')
 md5sums=('SKIP')
 
 build() {
