@@ -2,8 +2,8 @@
 # Contributor: Mario Sánchez <nullgaro@gmail.com>
 pkgname='ghfetch'
 pkgver='1.2.5'
-pkgrel=2
-epoch=2
+pkgrel=3
+epoch=3
 pkgdesc="A nice way to display CLI Github user / repo / organization info inspired in neofetch"
 arch=('x86_64')
 url="https://github.com/ghfetch/ghfetch"
