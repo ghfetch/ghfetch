@@ -226,6 +226,8 @@ def print_output(fetched_info):
 
 
 def main():
+    startup()
+
     if len(sys.argv) != 2:
         return print('Only one argument must be provided')
 
