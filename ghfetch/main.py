@@ -1,14 +1,14 @@
 #!/bin/python
 
-import sys
-import requests
+from sys import argv
+from requests import get
 from math import floor
 from pathlib import Path
 
 # requirements
-import asyncio
-import aiohttp
-from rich import print
+from asyncio import run
+from aiohttp import request
+from rich.console import Console
 from PIL import Image
 
 HOME_PATH = Path().home()
@@ -25,7 +25,7 @@ async def api_call(is_repo, name):
 
     URL = f'{BASE_URL}{ENDPOINT_URL}{name}'
 
-    async with aiohttp.request('GET', URL) as res:
+    async with request('GET', URL) as res:
         http_status = res.status
 
         if http_status != 200:
@@ -35,7 +35,7 @@ async def api_call(is_repo, name):
         return content
 
 async def create_languages_stat(url):
-    async with aiohttp.request('GET', url) as res:
+    async with request('GET', url) as res:
         http_status = res.status
 
         if http_status != 200:
@@ -60,7 +60,7 @@ def fetch_repo(info):
         'archived': info['archived'],
         **({'license': info['license']['name']} if info['license'] is not None else {'license': None}),
         **({'forked_parent': info['parent']['html_url']} if info['fork'] else {}),
-        'languages': asyncio.run(create_languages_stat(info['languages_url'])),
+        'languages': run(create_languages_stat(info['languages_url'])),
     }
 
 def fetch_user(info):
@@ -69,7 +69,7 @@ def fetch_user(info):
 def fetch_main(name):
     is_repo = '/' in name
 
-    info = asyncio.run(api_call(is_repo, name))
+    info = run(api_call(is_repo, name))
 
     if info in (401, 404, 429):
         return info
@@ -112,7 +112,7 @@ def image_to_unicode(url):
     file_name = url.split('/')[-1].split('?')[0]
     user_img_location = Path(f'{HOME_PATH}/.ghfetch/tmp/{file_name}.png')
 
-    img_data = requests.get(url).content
+    img_data = get(url).content
 
     with open(user_img_location, 'wb') as file:
         file.write(img_data)
@@ -221,17 +221,19 @@ def print_output(fetched_info):
         else:
             output[n + 12] += ', '.join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()])
 
+    console = Console()
+
     for line in output:
-        print(line)
+        console.print(line, overflow='crop', soft_wrap=True)
 
 
 def main():
     startup()
 
-    if len(sys.argv) != 2:
+    if len(argv) != 2:
         return print('Only one argument must be provided')
 
-    name = sys.argv[1]
+    name = argv[1]
 
     # API call
     fetched_info = fetch_main(name)
