@@ -238,7 +238,7 @@ def print_output(fetched_info):
                     .get('color') or COLOR_TEXT
             )
 
-        with open(Path(f'{THIS_PATH}/language-colors.json'), 'r') as languages:
+        with open(Path(f'{THIS_PATH}/data/language-colors.json'), 'r') as languages:
             languages = load(languages)
 
             if len(fetched_info["languages"].items()) > 2:
@@ -247,11 +247,15 @@ def print_output(fetched_info):
             else:
                 output[n + 13] += ', '.join([(f"{title(k, get_lang_color(languages, k))}: {text(v)}") for k, v in fetched_info["languages"].items()])
 
+
+            LENTH_BAR_DIVIDER = 3
+
             for lang, percentage in fetched_info['languages'].items():
                 percentage = float(percentage[:-1])
                 color = get_lang_color(languages, lang)
 
-                cols = ceil(percentage / 3)
+
+                cols = ceil(percentage / LENTH_BAR_DIVIDER)
                 for _ in range(cols):
                     output[n + 12] += f'{language(color)}'
 
