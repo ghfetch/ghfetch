@@ -1,5 +1,4 @@
 #!/bin/python
-
 from json import load
 from sys import argv
 from requests import get
