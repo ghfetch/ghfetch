@@ -1,8 +1,9 @@
 #!/bin/python
 
+from json import load
 from sys import argv
 from requests import get
-from math import floor
+from math import floor, ceil
 from pathlib import Path
 
 # requirements
@@ -13,6 +14,8 @@ from PIL import Image
 
 HOME_PATH = Path().home()
 THIS_PATH = Path(__file__).parent.resolve()
+UNICODE_BLOCK_CHAR = '\u2588'
+LANGUAGES_BLOCK_CHAR = '\u2580'
 
 def startup():
     tmp_folder = Path(f'{HOME_PATH}/.ghfetch/tmp')
@@ -33,6 +36,19 @@ async def api_call(is_repo, name):
 
         content = await res.json()
         return content
+
+def api_rate_exceeded(code):
+    if not isinstance(code, int):
+        return False
+
+    if code == 401:
+        print("You don't have access to this")
+    if code == 403:
+        print("This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee \u2615")
+    if code == 404:
+        print("The passed parameter it's not an existing User / Company / repo")
+
+    return True
 
 async def create_languages_stat(url):
     async with request('GET', url) as res:
@@ -71,7 +87,7 @@ def fetch_main(name):
 
     info = run(api_call(is_repo, name))
 
-    if info in (401, 404, 429):
+    if info in (401, 403, 404):
         return info
 
     generic_info = {
@@ -107,7 +123,6 @@ def rgb_to_hex(r, g, b):
 def image_to_unicode(url):
     IMAGE_WIDTH = 35
     COLORED_CHAR_LENGTH = 20 # Number of characters needed in raw to print a colored unicode character [#012345]█[/#012345]
-    UNICODE_BLOCK_CHAR = '\u2588'
 
     file_name = url.split('/')[-1].split('?')[0]
     user_img_location = Path(f'{HOME_PATH}/.ghfetch/tmp/{file_name}.png')
@@ -149,17 +164,20 @@ def image_to_unicode(url):
 
 def print_output(fetched_info):
     COLOR_TITLE = '#068FFF'
-    COLOR_TEXT = '#EEEEEE'
+    COLOR_TEXT = '#EDEDED'
     COLOR_ARCHIVED = '#F48024'
 
-    def title(text):
-        return f'[{COLOR_TITLE}]{text}[/{COLOR_TITLE}]'
+    def title(text, color = COLOR_TITLE):
+        return f'[{color}]{text}[/{color}]'
 
     def text(text):
         return f'[{COLOR_TEXT}]{text}[/{COLOR_TEXT}]'
 
     def archived(text):
         return f'[{COLOR_ARCHIVED}]{text}[/{COLOR_ARCHIVED}]'
+
+    def language(color):
+        return f'[{color}]{LANGUAGES_BLOCK_CHAR}[/{color}]'
 
     n = 0 # Where n is the row where to start
 
@@ -213,18 +231,32 @@ def print_output(fetched_info):
         output[n + 8] += f'{title("Forks")}: {text(fetched_info["forks"])}'
         output[n + 9] += f'{title("Joined at")}: {text(fetched_info["created_at"])}'
         output[n + 10] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
-        output[n + 11] += f'{title("Langs")}: ' if len(fetched_info['languages'].items()) > 0 else ''
 
-        if len(fetched_info["languages"].items()) > 2:
-            output[n + 12] += f'{", ".join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()][:2])}, '
-            output[n + 13] += ', '.join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()][2:])
-        else:
-            output[n + 12] += ', '.join([(f"{title(k)}: {text(v)}") for k, v in fetched_info["languages"].items()])
+        def get_lang_color(dict, lang):
+            return (
+                dict.get(lang)
+                    .get('color') or COLOR_TEXT
+            )
 
-    console = Console()
+        with open(Path(f'{THIS_PATH}/language-colors.json'), 'r') as languages:
+            languages = load(languages)
+
+            if len(fetched_info["languages"].items()) > 2:
+                output[n + 13] += ', '.join([(f"{title(k, get_lang_color(languages, k))}: {text(v)}") for k, v in fetched_info["languages"].items()][:2]) + ' '
+                output[n + 14] += ', '.join([(f"{title(k, get_lang_color(languages, k))}: {text(v)}") for k, v in fetched_info["languages"].items()][2:])
+            else:
+                output[n + 13] += ', '.join([(f"{title(k, get_lang_color(languages, k))}: {text(v)}") for k, v in fetched_info["languages"].items()])
+
+            for lang, percentage in fetched_info['languages'].items():
+                percentage = float(percentage[:-1])
+                color = get_lang_color(languages, lang)
+
+                cols = ceil(percentage / 3)
+                for _ in range(cols):
+                    output[n + 12] += f'{language(color)}'
 
     for line in output:
-        console.print(line, overflow='crop', soft_wrap=True)
+        Console().print(line, overflow='crop', soft_wrap=True)
 
 
 def main():
@@ -237,12 +269,8 @@ def main():
 
     # API call
     fetched_info = fetch_main(name)
-    if fetched_info == 401:
-        return print("You don't have access to this")
-    if fetched_info == 404:
-        return print("The passed parameter it's not an existing User / Company / repo")
-    if fetched_info == 429:
-        return print("This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee\u2615")
+    if api_rate_exceeded(fetched_info):
+        return
 
     print_output(fetched_info)
 
