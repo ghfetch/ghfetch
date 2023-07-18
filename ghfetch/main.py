@@ -12,7 +12,7 @@ from rich.console import Console
 from PIL import Image
 
 HOME_PATH = Path().home()
-THIS_PATH = Path(__file__).parent.resolve()
+THIS_PATH = Path(__file__).resolve().parent.resolve()
 UNICODE_BLOCK_CHAR = '\u2588'
 LANGUAGES_BLOCK_CHAR = '\u2580'
 
