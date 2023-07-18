@@ -1,3 +1,12 @@
+## [1.3.2](https://github.com/ghfetch/ghfetch/compare/v1.3.1...v1.3.2) (2023-07-18)
+
+
+### Bug Fixes
+
+* get real path when main.py is a symlink ([0514b60](https://github.com/ghfetch/ghfetch/commit/0514b60c24007dcd98dcf0655e6eabb2473fce01))
+
+
+
 ## [1.3.1](https://github.com/ghfetch/ghfetch/compare/v1.3.0...v1.3.1) (2023-07-17)
 
 
