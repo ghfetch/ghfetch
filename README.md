@@ -1,5 +1,6 @@
 # ghfetch
-<video loop src="./preview.webm">Preview</video>
+![preview](https://github.com/ghfetch/ghfetch/assets/90156486/7f85c2b2-69d2-424d-8f94-8cf49a0506c8)
+
 
 > The previous video has as examples the commands:
 >
@@ -32,7 +33,7 @@ yay -Syu ghfetch
 pip install --upgrade pip
 pip install ghfetch-pip
 ```
-> For troubleshooting see [here](https://github.com/ghfetch/ghfetch#troubleshooting-).
+> For troubleshooting see [here](https://github.com/ghfetch/ghfetch#troubleshooting-%EF%B8%8F).
 
 ### Manual installation
 ```sh
@@ -95,7 +96,8 @@ ghfetch ghfetch/ghfetch
 ### Warn: `WARNING: The scripts ghfetch-pip is installed in '/home/USERNAME/.local/bin' which is not on PATH.`
 
 If you are installing ghfetch using PIP, and you get a similar warning to this:</br>
-![Path Warn preview](./path_warn_preview.png)
+![path_warn_preview](https://github.com/ghfetch/ghfetch/assets/90156486/11501fd4-9d46-4880-ae8d-2f750ccd8574)
+
 
 The solution is to add `export PATH=/home/user/.local/bin:$PATH` to your .bashrc, where `/home/user/.local/bin` would be the path that the warning is telling you, and reboot.
 
@@ -106,5 +108,4 @@ This issue happens because the yay's cache is interfering with the update. The s
 ## People 👨‍💻
 This project was developed with ❤️ by [Nullgaro](https://github.com/nullgaro) and [Icutum](https://github.com/icutum).
 
-* ![Nullgaro](https://avatars.githubusercontent.com/nullgaro?size=40)[Nullgaro](https://github.com/nullgaro)
-* ![Mariolo](https://avatars.githubusercontent.com/icutum?size=40)[Icutum](https://github.com/icutum)
+[![Nullgaro](https://avatars.githubusercontent.com/nullgaro?size=40)](https://github.com/nullgaro)[![Mariolo](https://avatars.githubusercontent.com/icutum?size=40)](https://github.com/icutum)
