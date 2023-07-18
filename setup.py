@@ -10,6 +10,8 @@ setup(name='ghfetch-pip',
       url='https://github.com/ghfetch/ghfetch',
       packages=['ghfetch'],
       install_requires=['pillow', 'aiohttp', 'rich'],
+      package_data={'': ['./data/language-colors.json', './LICENSE', './README.md']},
+      include_package_data=True,
       entry_points={
         'console_scripts': [
             'ghfetch=ghfetch.main:main'
