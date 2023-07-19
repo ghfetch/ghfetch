@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/ghfetch/ghfetch/compare/v1.3.2...v1.4.0) (2023-07-19)
+
+
+### Features
+
+* Add commits count for repo ([20625b4](https://github.com/ghfetch/ghfetch/commit/20625b43d3e9d2ae564f5eec7c4037a9580a5844))
+
+
+
 ## [1.3.2](https://github.com/ghfetch/ghfetch/compare/v1.3.1...v1.3.2) (2023-07-18)
 
 
