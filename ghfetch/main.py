@@ -49,6 +49,11 @@ def api_rate_exceeded(code):
 
     return True
 
+def get_commits_number(owner, repo):
+    URL = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
+    commits = get(URL).headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
+    return {'commits': commits,}
+
 async def create_languages_stat(url):
     async with request('GET', url) as res:
         http_status = res.status
@@ -110,7 +115,7 @@ def fetch_main(name):
         return {k:v if v != '' else None for k, v in dict.items()}
 
     if is_repo:
-        return correct_formatting(generic_info | fetch_repo(info))
+        return correct_formatting(generic_info | fetch_repo(info)) | get_commits_number(*name.split('/'))
     elif info['type'] == 'User':
         return correct_formatting(generic_info | fetch_user(info))
     elif info['type'] == 'Organization':
@@ -214,17 +219,18 @@ def print_output(fetched_info):
         output[n + 13] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
 
     elif fetched_info['type'] == 'Repo':
-        output[n + 1] += archived('[Archived] ') if fetched_info['archived'] else ''
-        output[n + 1] += title(f'{fetched_info["owner"]}/{fetched_info["name"]}')
-        output[n + 2] += text('-' * (len(f'{fetched_info["owner"]}/{fetched_info["name"]}') if not fetched_info['archived'] else len(f'{fetched_info["owner"]}/{fetched_info["name"]}') + len('[Archived] ')))
+        output[n] += archived('[Archived] ') if fetched_info['archived'] else ''
+        output[n] += title(f'{fetched_info["owner"]}/{fetched_info["name"]}')
+        output[n + 1] += text('-' * (len(f'{fetched_info["owner"]}/{fetched_info["name"]}') if not fetched_info['archived'] else len(f'{fetched_info["owner"]}/{fetched_info["name"]}') + len('[Archived] ')))
 
         if 'forked_parent' in fetched_info:
-            output[n + 3] += f'{title("Forked from")}: {text(fetched_info["forked_parent"])}'
+            output[n + 2] += f'{title("Forked from")}: {text(fetched_info["forked_parent"])}'
             n += 1
 
-        output[n + 3] += f'{title("Owner")}: {text(fetched_info["owner"])}'
-        output[n + 4] += f'{title("Description")}: {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
-        output[n + 5] += f'{title("License")}: {text(fetched_info["license"])}'
+        output[n + 2] += f'{title("Owner")}: {text(fetched_info["owner"])}'
+        output[n + 3] += f'{title("Description")}: {text(fetched_info["description"][:50] + "..." if (fetched_info["description"] is not None) and (len(fetched_info["description"]) > 50) else fetched_info["description"])}'
+        output[n + 4] += f'{title("License")}: {text(fetched_info["license"])}'
+        output[n + 5] += f'{title("Commits")}: {text(fetched_info["commits"])}'
         output[n + 6] += f'{title("Stars")}: {text(fetched_info["stars"])}'
         output[n + 7] += f'{title("Watchers")}: {text(fetched_info["watchers"])}'
         output[n + 8] += f'{title("Forks")}: {text(fetched_info["forks"])}'
