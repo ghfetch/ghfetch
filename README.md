@@ -109,3 +109,7 @@ This issue happens because the yay's cache is interfering with the update. The s
 This project was developed with ❤️ by [Nullgaro](https://github.com/nullgaro) and [Icutum](https://github.com/icutum).
 
 [![Nullgaro](https://avatars.githubusercontent.com/nullgaro?size=40)](https://github.com/nullgaro)[![Mariolo](https://avatars.githubusercontent.com/icutum?size=40)](https://github.com/icutum)
+
+## Support ❤️
+If you find our ghfetch script helpful and want to contribute to its development and maintenance, consider buying us a coffee! ☕</br> Your support means a lot!</br></br>
+[![shield](https://img.shields.io/badge/buymeacoffee-donate-yellow)](https://bmc.link/ghfetch)
