@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/ghfetch/ghfetch/compare/v1.4.0...v1.4.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* warning from setup.py ([7c50011](https://github.com/ghfetch/ghfetch/commit/7c50011c2c6e62112eeb7c656269838814a53032))
+
+
+
 # [1.4.0](https://github.com/ghfetch/ghfetch/compare/v1.3.2...v1.4.0) (2023-07-19)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Add language colors in repos ([64d7ce7](https://github.com/ghfetch/ghfetch/commit/64d7ce70b0e6ab218e7dd68cfc8bfaeddbb42326))
-
-
-
-## [1.2.6](https://github.com/ghfetch/ghfetch/compare/c99c9e87c724fff616fde8274708ea6e30351f0e...v1.2.6) (2023-07-17)
-
-
-### Bug Fixes
-
-* Add necessary package.json ([c99c9e8](https://github.com/ghfetch/ghfetch/commit/c99c9e87c724fff616fde8274708ea6e30351f0e))
 
 
 
