@@ -3,12 +3,12 @@
 from setuptools import setup
 
 setup(name='ghfetch-pip',
-      version='1.4.0',
+      version='1.4.1',
       description='CLI tool to fetch GitHub information',
       author='Nullgaro, Icutum',
       author_email='ghfetch.contact@gmail.com',
       url='https://github.com/ghfetch/ghfetch',
-      packages=['ghfetch'],
+      packages=['ghfetch', 'ghfetch.data'],
       install_requires=['pillow', 'aiohttp', 'rich'],
       package_data={'': ['./data/language-colors.json', './LICENSE', './README.md']},
       include_package_data=True,
