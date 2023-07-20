@@ -1,5 +1,5 @@
 # ghfetch
-![preview](https://github.com/ghfetch/ghfetch/assets/90156486/7f85c2b2-69d2-424d-8f94-8cf49a0506c8)
+![preview](https://github.com/ghfetch/ghfetch/assets/90156486/9123b705-348b-491e-860c-f894b416ff5c)
 
 
 > The previous video has as examples the commands:
