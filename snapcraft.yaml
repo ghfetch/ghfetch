@@ -1,0 +1,25 @@
+name: ghfetch
+base: core22
+version: '1.5.0'
+summary: CLI tool to fetch GitHub information
+description: |
+      A nice way to display CLI user / organization / repo info inspired in Neofetch
+grade: stable
+confinement: strict
+parts:
+  ghfetch:
+    plugin: python
+    source: .
+    python-packages:
+      - requests
+      - pillow
+      - aiohttp
+      - rich
+
+apps:
+  ghfetch:
+    command: bin/ghfetch
+    plugs:
+      - home
+      - removable-media
+      - network
