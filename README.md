@@ -28,6 +28,11 @@ Use your favorite AUR helper, i.e:
 yay -Syu ghfetch
 ```
 
+**Snap:**
+```sh
+snap install ghfetch
+```
+
 **PIP:**
 ```sh
 pip install --upgrade pip
@@ -82,7 +87,7 @@ ghfetch ghfetch/ghfetch
 - [X] Yay
 - [ ] Apt
 - [X] Pip
-- [ ] Snap
+- [X] Snap
 - [ ] DNF/Yum
 - [ ] Brew
 - [ ] Windows
