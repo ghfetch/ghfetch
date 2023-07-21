@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/ghfetch/ghfetch/compare/v1.4.2...v1.5.0) (2023-07-21)
+
+
+### Features
+
+* Add snapcraft.yaml ([6d32641](https://github.com/ghfetch/ghfetch/commit/6d3264173ad4f06d56c529ffe38b398cf6fd29d2))
+
+
+
 ## [1.4.2](https://github.com/ghfetch/ghfetch/compare/v1.4.1...v1.4.2) (2023-07-20)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * get real path when main.py is a symlink ([0514b60](https://github.com/ghfetch/ghfetch/commit/0514b60c24007dcd98dcf0655e6eabb2473fce01))
-
-
-
-## [1.3.1](https://github.com/ghfetch/ghfetch/compare/v1.3.0...v1.3.1) (2023-07-17)
-
-
-### Bug Fixes
-
-* testing ([f739a2b](https://github.com/ghfetch/ghfetch/commit/f739a2b16902dfa999546001cfa7ad8637266ce8))
 
 
 
