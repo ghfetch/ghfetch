@@ -1,20 +1,24 @@
 name: ghfetch
 base: core22
-version: '1.5.0'
+adopt-info: ghfetch
 summary: CLI tool to fetch GitHub information
 description: |
-      A nice way to display CLI user / organization / repo info inspired in Neofetch
+      A nice way to display CLI user / organization / repo info inspired in Neo>
 grade: stable
 confinement: strict
+
 parts:
   ghfetch:
     plugin: python
-    source: .
+    source: https://github.com/ghfetch/ghfetch.git
     python-packages:
       - requests
       - pillow
       - aiohttp
       - rich
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git describe --tags)"
 
 apps:
   ghfetch:
