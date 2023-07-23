@@ -1,4 +1,4 @@
-#!/bin/python
+#!/bin/python3
 from json import load
 from sys import argv
 from requests import get
