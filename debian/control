@@ -1,0 +1,12 @@
+Source: ghfetch
+Section: devel
+Priority: extra
+Build-Depends: python3,dh-python,python3-distutils-extra,debhelper
+Maintainer: ghfetch <ghfetch.contact@gmail.com>
+Homepage: https://github.com/ghfetch/ghfetch
+
+Package: ghfetch
+Version: 1.5-0
+Architecture: all
+Depends: git,python3,python3-pip,python3-setuptools,python3-aiohttp,python3-requests,python3-pillow,python3-rich
+Description: A nice way to display CLI Github user / repo / organization info inspired in Neofetch

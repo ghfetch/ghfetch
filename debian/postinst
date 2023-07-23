@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+
+ln -sf /usr/lib/ghfetch/main.py /usr/bin/ghfetch
+chmod 755 /usr/bin/ghfetch
