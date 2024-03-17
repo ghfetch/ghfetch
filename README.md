@@ -85,7 +85,7 @@ ghfetch ghfetch
 ghfetch confugiradores
 ```
 
-**Repo:**
+**Repo:**README.md
 ```sh
 ghfetch torvalds/linux
 ghfetch ghfetch/ghfetch
@@ -124,6 +124,12 @@ The solution is to add `export PATH=/home/user/.local/bin:$PATH` to your .bashrc
 ### Updating ghfetch using yay doesn't update it
 
 This issue happens because the yay's cache is interfering with the update. The solution is to clear the cache of yay with `yay -Sc --aur`.
+
+### When adding the repository to apt gets some pythonic error
+
+![python_error](https://github.com/ghfetch/ghfetch/assets/90156486/f2694b45-a51f-4b5b-aa91-b43b8bc54782)
+
+This issue happens because `apt-add-repository` is missing `python3-launchpadlib`. The solution is to install it with `apt-get install python3-launchpadlib`.
 
 ## People 👨‍💻
 This project was developed with ❤️ by [Nullgaro](https://github.com/nullgaro) and [Icutum](https://github.com/icutum).
