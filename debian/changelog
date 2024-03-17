@@ -1,1 +1,5 @@
-ghfetch (1.5.0) stable; urgency=low
+ghfetch (1.5.3) unstable; urgency=low
+
+  * Initial release
+
+ -- ghfetch <ghfetch.contact@gmail.com>  Fri, 28 Jul 2023 19:10:00 +0000
