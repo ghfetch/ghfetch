@@ -1,0 +1,6 @@
+[ghfetch-ppa]
+fqdn = ppa.launchpad.net
+method = ftp
+incoming = ~ghfetch/ubuntu/ghfetch/mantic
+login = anonymous
+allow_unsigned_uploads = 0
