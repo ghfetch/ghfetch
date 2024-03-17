@@ -1,3 +1,14 @@
+## [1.5.1](https://github.com/ghfetch/ghfetch/compare/v1.5.0...v1.5.1) (2024-03-17)
+
+
+### Bug Fixes
+
+* Add .dput.cf ([4701a5c](https://github.com/ghfetch/ghfetch/commit/4701a5cb07f7ca5f6f36e3b979f220228c9b12df))
+* Add debian/files ([b542282](https://github.com/ghfetch/ghfetch/commit/b542282d99e7dc17a56f0d970b26e45836428c21))
+* Correct config for build and upload to launchpad ([a5d5dc0](https://github.com/ghfetch/ghfetch/commit/a5d5dc09f5b52b2fa8650d2719ef8a39ba32e34c))
+
+
+
 # [1.5.0](https://github.com/ghfetch/ghfetch/compare/v1.4.2...v1.5.0) (2023-07-21)
 
 
@@ -31,15 +42,6 @@
 ### Features
 
 * Add commits count for repo ([20625b4](https://github.com/ghfetch/ghfetch/commit/20625b43d3e9d2ae564f5eec7c4037a9580a5844))
-
-
-
-## [1.3.2](https://github.com/ghfetch/ghfetch/compare/v1.3.1...v1.3.2) (2023-07-18)
-
-
-### Bug Fixes
-
-* get real path when main.py is a symlink ([0514b60](https://github.com/ghfetch/ghfetch/commit/0514b60c24007dcd98dcf0655e6eabb2473fce01))
 
 
 
