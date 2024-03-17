@@ -22,6 +22,21 @@ Additionally, in this project, we've used Github Actions to be able to create a 
 
 ### Package manager
 
+**apt:**</br>
+Firstly you have to add the repository with "add-apt-repository":
+```sh
+add-apt-repository "deb https://ppa.launchpadcontent.net/ghfetch/ghfetch/ubuntu/ mantic main"
+apt-get update
+```
+If you don't have "add-apt-repository", you can install it with: 
+```sh
+apt-get install software-properties-common python3-launchpadlib
+```
+And then you can install **ghfetch**
+```sh
+apt-get install ghfetch
+```
+
 **Arch Linux:**</br>
 Use your favorite AUR helper, i.e:
 ```sh
@@ -85,7 +100,7 @@ ghfetch ghfetch/ghfetch
 ### Package upload 📦
 
 - [X] Yay
-- [ ] Apt
+- [X] Apt
 - [X] Pip
 - [X] Snap
 - [ ] DNF/Yum
