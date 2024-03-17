@@ -1,3 +1,12 @@
+## [1.5.2](https://github.com/ghfetch/ghfetch/compare/v1.5.1...v1.5.2) (2024-03-17)
+
+
+### Bug Fixes
+
+* Available in apt! ([38fa3ff](https://github.com/ghfetch/ghfetch/commit/38fa3ff407ed1dc523bb8fe770949834f7c6c5ca))
+
+
+
 ## [1.5.1](https://github.com/ghfetch/ghfetch/compare/v1.5.0...v1.5.1) (2024-03-17)
 
 
@@ -33,15 +42,6 @@
 ### Bug Fixes
 
 * warning from setup.py ([7c50011](https://github.com/ghfetch/ghfetch/commit/7c50011c2c6e62112eeb7c656269838814a53032))
-
-
-
-# [1.4.0](https://github.com/ghfetch/ghfetch/compare/v1.3.2...v1.4.0) (2023-07-19)
-
-
-### Features
-
-* Add commits count for repo ([20625b4](https://github.com/ghfetch/ghfetch/commit/20625b43d3e9d2ae564f5eec7c4037a9580a5844))
 
 
 
