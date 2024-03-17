@@ -1,3 +1,12 @@
+## [1.5.3](https://github.com/ghfetch/ghfetch/compare/v1.5.2...v1.5.3) (2024-03-17)
+
+
+### Bug Fixes
+
+* troubleshoot for add-apt-repository pythonic error ([d34d6e5](https://github.com/ghfetch/ghfetch/commit/d34d6e572fca522176ee2e6c6ec1c0b1a24dd226))
+
+
+
 ## [1.5.2](https://github.com/ghfetch/ghfetch/compare/v1.5.1...v1.5.2) (2024-03-17)
 
 
@@ -33,15 +42,6 @@
 ### Bug Fixes
 
 * remove -pip suffix and description ([1209fa4](https://github.com/ghfetch/ghfetch/commit/1209fa4fce62ecd46134a0139ba7666224157450))
-
-
-
-## [1.4.1](https://github.com/ghfetch/ghfetch/compare/v1.4.0...v1.4.1) (2023-07-20)
-
-
-### Bug Fixes
-
-* warning from setup.py ([7c50011](https://github.com/ghfetch/ghfetch/commit/7c50011c2c6e62112eeb7c656269838814a53032))
 
 
 
