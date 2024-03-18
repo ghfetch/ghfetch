@@ -85,7 +85,7 @@ ghfetch ghfetch
 ghfetch confugiradores
 ```
 
-**Repo:**README.md
+**Repo:**
 ```sh
 ghfetch torvalds/linux
 ghfetch ghfetch/ghfetch
