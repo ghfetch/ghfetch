@@ -32,6 +32,9 @@ If you don't have "add-apt-repository", you can install it with:
 ```sh
 apt-get install software-properties-common python3-launchpadlib
 ```
+
+> For troubleshooting see [here](https://github.com/ghfetch/ghfetch#troubleshooting-%EF%B8%8F).
+
 And then you can install **ghfetch**
 ```sh
 apt-get install ghfetch
