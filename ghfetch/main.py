@@ -257,14 +257,14 @@ def print_output(fetched_info):
                 output[n + 13] += ', '.join([(f"{title(k, get_lang_color(languages, k))}: {text(v)}") for k, v in fetched_info["languages"].items()])
 
 
-            LENTH_BAR_DIVIDER = 3
+            LENGTH_BAR_DIVIDER = 3
 
             for lang, percentage in fetched_info['languages'].items():
                 percentage = float(percentage[:-1])
                 color = get_lang_color(languages, lang)
 
 
-                cols = ceil(percentage / LENTH_BAR_DIVIDER)
+                cols = ceil(percentage / LENGTH_BAR_DIVIDER)
                 for _ in range(cols):
                     output[n + 12] += f'{language(color)}'
 
