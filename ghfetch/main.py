@@ -167,6 +167,7 @@ def image_to_unicode(url):
 
         Path.unlink(user_img_location, missing_ok=True)
 
+        unicode_per_rows.append(f"{' ' * IMAGE_WIDTH}\t")
         return unicode_per_rows
 
 def print_output(fetched_info):
