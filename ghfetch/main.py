@@ -136,6 +136,9 @@ def image_to_unicode(url):
     with open(user_img_location, 'wb') as file:
         file.write(img_data)
 
+    # Convert image to RGB in case the image is .gif
+    Image.open(user_img_location).convert('RGB').save(user_img_location)
+
     with Image.open(user_img_location) as image:
         MULTIPLIER = 0.45 # Used to fix the image height because the characters are taller
 
