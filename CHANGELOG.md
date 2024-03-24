@@ -1,3 +1,13 @@
+## [1.5.4](https://github.com/ghfetch/ghfetch/compare/v1.5.3...v1.5.4) (2024-03-24)
+
+
+### Bug Fixes
+
+* add one extra row to print languages to prevent overflow ([483a2bd](https://github.com/ghfetch/ghfetch/commit/483a2bdef09bf39bc5a67e1436a07cf01d107f1f))
+* convert image to RGB colors in case pfp is .gif ([19fe3c8](https://github.com/ghfetch/ghfetch/commit/19fe3c895f41b66371aa474e768fac48c640f12f))
+
+
+
 ## [1.5.3](https://github.com/ghfetch/ghfetch/compare/v1.5.2...v1.5.3) (2024-03-17)
 
 
@@ -33,15 +43,6 @@
 ### Features
 
 * Add snapcraft.yaml ([6d32641](https://github.com/ghfetch/ghfetch/commit/6d3264173ad4f06d56c529ffe38b398cf6fd29d2))
-
-
-
-## [1.4.2](https://github.com/ghfetch/ghfetch/compare/v1.4.1...v1.4.2) (2023-07-20)
-
-
-### Bug Fixes
-
-* remove -pip suffix and description ([1209fa4](https://github.com/ghfetch/ghfetch/commit/1209fa4fce62ecd46134a0139ba7666224157450))
 
 
 
