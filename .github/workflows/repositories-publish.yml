@@ -14,6 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+# Section for pip
     - name: Set up Python
       uses: actions/setup-python@v5.1.0
       with:
@@ -32,3 +33,28 @@ jobs:
       env:
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: twine upload -u ghfetch -p "$PYPI_PASSWORD" dist/*
+
+# Section for apt
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v6.1.0
+      with:
+        gpg_private_key: ${{ secrets.GPG_KEY }}
+        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+    - name: Install dependencies
+      run: sudo apt-get -y install python3 python3-pip python3-distutils-extra dh-python gpg debianutils devscripts debhelper
+
+    - name: Build package
+      shell: bash
+      env:
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      run: |
+        cd debian
+        sudo chmod +x rules
+        debuild -S -p"gpg --batch --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback"
+
+    - name: Upload package to apt
+      run: |
+        cp  debian/.dput.cf .
+        sudo chmod +x *_source.changes
+        dput -f ghfetch-ppa *_source.changes
