@@ -58,3 +58,37 @@ jobs:
         cp  debian/.dput.cf .
         sudo chmod +x *_source.changes
         dput -f ghfetch-ppa *_source.changes
+
+# Section for AUR
+    - name: Configure ssh
+      uses: kielabokkie/ssh-key-and-known-hosts-action@v1.4.1
+      with:
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+        ssh-host: aur.archlinux.org
+
+    - name: Pull aur repository
+      run: |
+        mkdir aur
+        cd aur
+        git clone ssh://aur@aur.archlinux.org/ghfetch.git
+
+    - name: Generate SRCINFO file
+      uses: ouuan/pkgbuild-action@v1.2.0
+      id: build-package
+      with:
+        path: .
+
+    - name: Get necesary files into repository folder
+      run: |
+        cp .SRCINFO ./aur/ghfetch
+        cp PKGBUILD ./aur/ghfetch
+
+    - name: Push new version
+      run: |
+        cd aur/ghfetch
+        git config --global user.email "nullgaro@gmail.com"
+        git config --global user.name "Daniel Milenov"
+        git config --global core.autocrlf "input"
+        git add .
+        git commit -m "Update to version $(awk -F '"' 'FNR == 2 {print $4}' ../../package.json)"
+        git push
