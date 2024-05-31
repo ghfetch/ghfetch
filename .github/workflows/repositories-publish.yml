@@ -14,6 +14,24 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+# Section for snap
+    - name: Install needed dependences
+      run: |
+        apt-get install snapd
+        snap install core
+        snap install lxd
+        snap install snapcraft --classic
+        lxd init --auto
+
+    - name: Build and upload package to snap
+      shell: bash
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN }}
+      run: |
+        snapcraft
+        sudo snapcraft clean
+        snapcraft upload --release=stable ghfetch_*
+
 # Section for pip
     - name: Set up Python
       uses: actions/setup-python@v5.1.0
