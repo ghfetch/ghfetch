@@ -1,3 +1,12 @@
+## [1.5.5](https://github.com/ghfetch/ghfetch/compare/v1.5.4...v1.5.5) (2024-06-02)
+
+
+### Bug Fixes
+
+* Handle API limit exceeded when asking for commits number ([0a2278e](https://github.com/ghfetch/ghfetch/commit/0a2278efa2380483903e6ff16356cd804016651f))
+
+
+
 ## [1.5.4](https://github.com/ghfetch/ghfetch/compare/v1.5.3...v1.5.4) (2024-03-24)
 
 
