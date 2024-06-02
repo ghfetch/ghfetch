@@ -1,3 +1,12 @@
+## [1.5.9](https://github.com/ghfetch/ghfetch/compare/v1.5.8...v1.5.9) (2024-06-02)
+
+
+### Bug Fixes
+
+* add sudo for lxd init ([41e7ac9](https://github.com/ghfetch/ghfetch/commit/41e7ac9a171294413ce0a809087ee16e5c2d30c1))
+
+
+
 ## [1.5.8](https://github.com/ghfetch/ghfetch/compare/v1.5.7...v1.5.8) (2024-06-02)
 
 
@@ -33,16 +42,6 @@
 ### Bug Fixes
 
 * Handle API limit exceeded when asking for commits number ([0a2278e](https://github.com/ghfetch/ghfetch/commit/0a2278efa2380483903e6ff16356cd804016651f))
-
-
-
-## [1.5.4](https://github.com/ghfetch/ghfetch/compare/v1.5.3...v1.5.4) (2024-03-24)
-
-
-### Bug Fixes
-
-* add one extra row to print languages to prevent overflow ([483a2bd](https://github.com/ghfetch/ghfetch/commit/483a2bdef09bf39bc5a67e1436a07cf01d107f1f))
-* convert image to RGB colors in case pfp is .gif ([19fe3c8](https://github.com/ghfetch/ghfetch/commit/19fe3c895f41b66371aa474e768fac48c640f12f))
 
 
 
