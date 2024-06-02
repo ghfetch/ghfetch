@@ -35,9 +35,9 @@ jobs:
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN }}
       run: |
-        sudo lxd init --auto
         getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
         newgrp lxd
+        sudo lxd init --auto
         snapcraft
         sudo snapcraft clean
         snapcraft upload --release=stable ghfetch_*
