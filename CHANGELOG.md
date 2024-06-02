@@ -1,3 +1,12 @@
+## [1.5.5](https://github.com/ghfetch/ghfetch/compare/v1.5.4...v1.5.5) (2024-06-02)
+
+
+### Bug Fixes
+
+* Handle API limit exceeded when asking for commits number ([0a2278e](https://github.com/ghfetch/ghfetch/commit/0a2278efa2380483903e6ff16356cd804016651f))
+
+
+
 ## [1.5.4](https://github.com/ghfetch/ghfetch/compare/v1.5.3...v1.5.4) (2024-03-24)
 
 
@@ -34,15 +43,6 @@
 * Add .dput.cf ([4701a5c](https://github.com/ghfetch/ghfetch/commit/4701a5cb07f7ca5f6f36e3b979f220228c9b12df))
 * Add debian/files ([b542282](https://github.com/ghfetch/ghfetch/commit/b542282d99e7dc17a56f0d970b26e45836428c21))
 * Correct config for build and upload to launchpad ([a5d5dc0](https://github.com/ghfetch/ghfetch/commit/a5d5dc09f5b52b2fa8650d2719ef8a39ba32e34c))
-
-
-
-# [1.5.0](https://github.com/ghfetch/ghfetch/compare/v1.4.2...v1.5.0) (2023-07-21)
-
-
-### Features
-
-* Add snapcraft.yaml ([6d32641](https://github.com/ghfetch/ghfetch/commit/6d3264173ad4f06d56c529ffe38b398cf6fd29d2))
 
 
 
