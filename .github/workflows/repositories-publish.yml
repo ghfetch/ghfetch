@@ -25,10 +25,10 @@ jobs:
 # Section for snap
     - name: Install needed dependences
       run: |
-        apt-get install snapd
-        snap install core
-        snap install lxd
-        snap install snapcraft --classic
+        sudo apt-get install snapd
+        sudo snap install core
+        sudo snap install lxd
+        sudo snap install snapcraft --classic
         lxd init --auto
 
     - name: Build and upload package to snap
