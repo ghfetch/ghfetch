@@ -102,7 +102,7 @@ ghfetch ghfetch/ghfetch
 
 ### Package upload 📦
 
-- [X] Yay
+- [X] AUR
 - [X] Apt
 - [X] Pip
 - [X] Snap
