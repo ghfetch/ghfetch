@@ -20,7 +20,7 @@ jobs:
         python-version: '3.10'
 
     - name: Update version in files
-      run: python ,github/workflows/update_version.py
+      run: python .github/workflows/update_version.py
 
 # Section for snap
     - name: Install needed dependences
