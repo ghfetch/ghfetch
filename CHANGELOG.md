@@ -1,3 +1,12 @@
+## [1.5.12](https://github.com/ghfetch/ghfetch/compare/v1.5.11...v1.5.12) (2024-06-02)
+
+
+### Bug Fixes
+
+* Add needed config for the CI/CD of snapcraft ([0793fde](https://github.com/ghfetch/ghfetch/commit/0793fde8b069cc5a70865af879b25ace0468da26))
+
+
+
 ## [1.5.11](https://github.com/ghfetch/ghfetch/compare/v1.5.10...v1.5.11) (2024-06-02)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * add sudo for installing dependencies ([aa65b12](https://github.com/ghfetch/ghfetch/commit/aa65b12d770333a23db654089cce2e8cdea99b5d))
-
-
-
-## [1.5.7](https://github.com/ghfetch/ghfetch/compare/v1.5.6...v1.5.7) (2024-06-02)
-
-
-### Bug Fixes
-
-* typo in path for update_version script ([fe39ba3](https://github.com/ghfetch/ghfetch/commit/fe39ba3a6d3c5b626aa9f1dae577c9c4f9cd1b5d))
 
 
 
