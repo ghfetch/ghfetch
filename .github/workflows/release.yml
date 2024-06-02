@@ -19,7 +19,7 @@ jobs:
 
       - name: create release
         uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+#        if: ${{ steps.changelog.outputs.skipped == 'false' }}
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGELOG_RELEASE }}
