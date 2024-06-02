@@ -1,3 +1,14 @@
+## [1.5.6](https://github.com/ghfetch/ghfetch/compare/v1.5.5...v1.5.6) (2024-06-02)
+
+
+### Bug Fixes
+
+* Change yay for AUR ([68a1915](https://github.com/ghfetch/ghfetch/commit/68a19158b37852edc6c5e74d9dc9b9eabd5ae75b))
+* out of phase version ([72cbf4d](https://github.com/ghfetch/ghfetch/commit/72cbf4d388b315310bd738ae77c51e459abac3b6))
+* version ([c6b79ad](https://github.com/ghfetch/ghfetch/commit/c6b79ad70c8d0279b45ba75de9bcd9b18e8266a5))
+
+
+
 ## [1.5.5](https://github.com/ghfetch/ghfetch/compare/v1.5.4...v1.5.5) (2024-06-02)
 
 
@@ -32,17 +43,6 @@
 ### Bug Fixes
 
 * Available in apt! ([38fa3ff](https://github.com/ghfetch/ghfetch/commit/38fa3ff407ed1dc523bb8fe770949834f7c6c5ca))
-
-
-
-## [1.5.1](https://github.com/ghfetch/ghfetch/compare/v1.5.0...v1.5.1) (2024-03-17)
-
-
-### Bug Fixes
-
-* Add .dput.cf ([4701a5c](https://github.com/ghfetch/ghfetch/commit/4701a5cb07f7ca5f6f36e3b979f220228c9b12df))
-* Add debian/files ([b542282](https://github.com/ghfetch/ghfetch/commit/b542282d99e7dc17a56f0d970b26e45836428c21))
-* Correct config for build and upload to launchpad ([a5d5dc0](https://github.com/ghfetch/ghfetch/commit/a5d5dc09f5b52b2fa8650d2719ef8a39ba32e34c))
 
 
 
