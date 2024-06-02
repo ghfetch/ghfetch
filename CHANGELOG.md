@@ -1,3 +1,12 @@
+## [1.5.8](https://github.com/ghfetch/ghfetch/compare/v1.5.7...v1.5.8) (2024-06-02)
+
+
+### Bug Fixes
+
+* add sudo for installing dependencies ([aa65b12](https://github.com/ghfetch/ghfetch/commit/aa65b12d770333a23db654089cce2e8cdea99b5d))
+
+
+
 ## [1.5.7](https://github.com/ghfetch/ghfetch/compare/v1.5.6...v1.5.7) (2024-06-02)
 
 
@@ -34,15 +43,6 @@
 
 * add one extra row to print languages to prevent overflow ([483a2bd](https://github.com/ghfetch/ghfetch/commit/483a2bdef09bf39bc5a67e1436a07cf01d107f1f))
 * convert image to RGB colors in case pfp is .gif ([19fe3c8](https://github.com/ghfetch/ghfetch/commit/19fe3c895f41b66371aa474e768fac48c640f12f))
-
-
-
-## [1.5.3](https://github.com/ghfetch/ghfetch/compare/v1.5.2...v1.5.3) (2024-03-17)
-
-
-### Bug Fixes
-
-* troubleshoot for add-apt-repository pythonic error ([d34d6e5](https://github.com/ghfetch/ghfetch/commit/d34d6e572fca522176ee2e6c6ec1c0b1a24dd226))
 
 
 
