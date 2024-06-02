@@ -29,13 +29,15 @@ jobs:
         sudo snap install core
         sudo snap install lxd
         sudo snap install snapcraft --classic
-        sudo lxd init --auto
 
     - name: Build and upload package to snap
       shell: bash
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN }}
       run: |
+        sudo lxd init --auto
+        getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
+        newgrp lxd
         snapcraft
         sudo snapcraft clean
         snapcraft upload --release=stable ghfetch_*
