@@ -51,7 +51,12 @@ def api_rate_exceeded(code):
 
 def get_commits_number(owner, repo):
     URL = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
-    commits = get(URL).headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
+    response = get(URL)
+
+    if response.status_code != 200:
+        return response.status_code
+
+    commits = response.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
     return {'commits': commits,}
 
 async def create_languages_stat(url):
@@ -115,7 +120,11 @@ def fetch_main(name):
         return {k:v if v != '' else None for k, v in dict.items()}
 
     if is_repo:
-        return correct_formatting(generic_info | fetch_repo(info)) | get_commits_number(*name.split('/'))
+        commits = get_commits_number(*name.split('/'))
+        if commits in (401, 403, 404):
+            return commits
+
+        return correct_formatting(generic_info | fetch_repo(info)) | commits
     elif info['type'] == 'User':
         return correct_formatting(generic_info | fetch_user(info))
     elif info['type'] == 'Organization':
