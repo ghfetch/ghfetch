@@ -1,3 +1,12 @@
+## [1.5.10](https://github.com/ghfetch/ghfetch/compare/v1.5.9...v1.5.10) (2024-06-02)
+
+
+### Bug Fixes
+
+* Add user to lxd group ([34547fa](https://github.com/ghfetch/ghfetch/commit/34547fa41ef5f3c84fe983f6f42e554a9090a31d))
+
+
+
 ## [1.5.9](https://github.com/ghfetch/ghfetch/compare/v1.5.8...v1.5.9) (2024-06-02)
 
 
@@ -33,15 +42,6 @@
 * Change yay for AUR ([68a1915](https://github.com/ghfetch/ghfetch/commit/68a19158b37852edc6c5e74d9dc9b9eabd5ae75b))
 * out of phase version ([72cbf4d](https://github.com/ghfetch/ghfetch/commit/72cbf4d388b315310bd738ae77c51e459abac3b6))
 * version ([c6b79ad](https://github.com/ghfetch/ghfetch/commit/c6b79ad70c8d0279b45ba75de9bcd9b18e8266a5))
-
-
-
-## [1.5.5](https://github.com/ghfetch/ghfetch/compare/v1.5.4...v1.5.5) (2024-06-02)
-
-
-### Bug Fixes
-
-* Handle API limit exceeded when asking for commits number ([0a2278e](https://github.com/ghfetch/ghfetch/commit/0a2278efa2380483903e6ff16356cd804016651f))
 
 
 
