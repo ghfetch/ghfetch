@@ -1,3 +1,12 @@
+## [1.5.7](https://github.com/ghfetch/ghfetch/compare/v1.5.6...v1.5.7) (2024-06-02)
+
+
+### Bug Fixes
+
+* typo in path for update_version script ([fe39ba3](https://github.com/ghfetch/ghfetch/commit/fe39ba3a6d3c5b626aa9f1dae577c9c4f9cd1b5d))
+
+
+
 ## [1.5.6](https://github.com/ghfetch/ghfetch/compare/v1.5.5...v1.5.6) (2024-06-02)
 
 
@@ -34,15 +43,6 @@
 ### Bug Fixes
 
 * troubleshoot for add-apt-repository pythonic error ([d34d6e5](https://github.com/ghfetch/ghfetch/commit/d34d6e572fca522176ee2e6c6ec1c0b1a24dd226))
-
-
-
-## [1.5.2](https://github.com/ghfetch/ghfetch/compare/v1.5.1...v1.5.2) (2024-03-17)
-
-
-### Bug Fixes
-
-* Available in apt! ([38fa3ff](https://github.com/ghfetch/ghfetch/commit/38fa3ff407ed1dc523bb8fe770949834f7c6c5ca))
 
 
 
