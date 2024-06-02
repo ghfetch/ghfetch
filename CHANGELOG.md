@@ -1,3 +1,12 @@
+## [1.5.11](https://github.com/ghfetch/ghfetch/compare/v1.5.10...v1.5.11) (2024-06-02)
+
+
+### Bug Fixes
+
+* The order of the factors does not alter the product ([f958db8](https://github.com/ghfetch/ghfetch/commit/f958db8d222ba953ee5e16cff7fbd6cefe13795f))
+
+
+
 ## [1.5.10](https://github.com/ghfetch/ghfetch/compare/v1.5.9...v1.5.10) (2024-06-02)
 
 
@@ -31,17 +40,6 @@
 ### Bug Fixes
 
 * typo in path for update_version script ([fe39ba3](https://github.com/ghfetch/ghfetch/commit/fe39ba3a6d3c5b626aa9f1dae577c9c4f9cd1b5d))
-
-
-
-## [1.5.6](https://github.com/ghfetch/ghfetch/compare/v1.5.5...v1.5.6) (2024-06-02)
-
-
-### Bug Fixes
-
-* Change yay for AUR ([68a1915](https://github.com/ghfetch/ghfetch/commit/68a19158b37852edc6c5e74d9dc9b9eabd5ae75b))
-* out of phase version ([72cbf4d](https://github.com/ghfetch/ghfetch/commit/72cbf4d388b315310bd738ae77c51e459abac3b6))
-* version ([c6b79ad](https://github.com/ghfetch/ghfetch/commit/c6b79ad70c8d0279b45ba75de9bcd9b18e8266a5))
 
 
 
