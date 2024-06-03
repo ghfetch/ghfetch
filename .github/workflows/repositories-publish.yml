@@ -71,9 +71,10 @@ jobs:
 
     - name: Upload package to apt
       run: |
-        cp debian/.dput.cf ../
-        sudo chmod +x ../*_source.changes
-        dput -f ghfetch-ppa ../*_source.changes
+        cd ..
+        cp ghfetch/debian/.dput.cf .
+        sudo chmod +x *_source.changes
+        dput -f ghfetch-ppa *_source.changes
 
 # Section for AUR
     - name: Configure ssh
