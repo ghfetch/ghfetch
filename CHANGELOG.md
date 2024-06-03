@@ -1,3 +1,12 @@
+## [1.5.15](https://github.com/ghfetch/ghfetch/compare/v1.5.14...v1.5.15) (2024-06-03)
+
+
+### Bug Fixes
+
+* Change new path of .dput.cf ([2a9e32e](https://github.com/ghfetch/ghfetch/commit/2a9e32e9be8c7273503c53304fced463394fdd41))
+
+
+
 ## [1.5.14](https://github.com/ghfetch/ghfetch/compare/v1.5.13...v1.5.14) (2024-06-03)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * The order of the factors does not alter the product ([f958db8](https://github.com/ghfetch/ghfetch/commit/f958db8d222ba953ee5e16cff7fbd6cefe13795f))
-
-
-
-## [1.5.10](https://github.com/ghfetch/ghfetch/compare/v1.5.9...v1.5.10) (2024-06-02)
-
-
-### Bug Fixes
-
-* Add user to lxd group ([34547fa](https://github.com/ghfetch/ghfetch/commit/34547fa41ef5f3c84fe983f6f42e554a9090a31d))
 
 
 
