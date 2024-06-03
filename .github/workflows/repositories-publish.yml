@@ -73,6 +73,7 @@ jobs:
       run: |
         cd ..
         cp ghfetch/debian/.dput.cf .
+        sudo chmod 755 .dput.cf
         sudo chmod +x *_source.changes
         dput -f ghfetch-ppa *_source.changes
 
