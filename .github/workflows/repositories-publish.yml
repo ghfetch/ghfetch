@@ -23,25 +23,17 @@ jobs:
       run: python .github/workflows/update_version.py
 
 # Section for snap
-    - name: Install needed dependences
-      run: |
-        sudo apt-get install snapd
-        sudo snap install core
-        sudo snap install lxd
-        sudo snap install snapcraft --classic
+    - name: Build snap file
+      uses: snapcore/action-build@v1
+      id: build
 
-    - name: Build and upload package to snap
-      shell: bash
+    - name: Upload snap file to Snapcraft
+      uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_LOGIN }}
-      run: |
-        getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
-        newgrp lxd
-        sudo lxd init --auto
-        sudo iptables -P FORWARD ACCEPT
-        sudo snapcraft
-        sudo snapcraft clean
-        sudo snapcraft upload --release=stable ghfetch_*
+      with:
+        snap: ${{ steps.build.outputs.snap }}
+        release: stable
 
 # Section for pip
     - name: Install dependencies
