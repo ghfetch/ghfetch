@@ -1,3 +1,12 @@
+## [1.5.14](https://github.com/ghfetch/ghfetch/compare/v1.5.13...v1.5.14) (2024-06-03)
+
+
+### Bug Fixes
+
+* Fix path to *_source.changes ([aee2069](https://github.com/ghfetch/ghfetch/commit/aee2069f505480c6a37fb7289a6bdd3e949c8e24))
+
+
+
 ## [1.5.13](https://github.com/ghfetch/ghfetch/compare/v1.5.12...v1.5.13) (2024-06-03)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Add user to lxd group ([34547fa](https://github.com/ghfetch/ghfetch/commit/34547fa41ef5f3c84fe983f6f42e554a9090a31d))
-
-
-
-## [1.5.9](https://github.com/ghfetch/ghfetch/compare/v1.5.8...v1.5.9) (2024-06-02)
-
-
-### Bug Fixes
-
-* add sudo for lxd init ([41e7ac9](https://github.com/ghfetch/ghfetch/commit/41e7ac9a171294413ce0a809087ee16e5c2d30c1))
 
 
 
