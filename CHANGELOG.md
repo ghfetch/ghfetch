@@ -1,3 +1,12 @@
+## [1.5.13](https://github.com/ghfetch/ghfetch/compare/v1.5.12...v1.5.13) (2024-06-03)
+
+
+### Bug Fixes
+
+* Use snapcore actions for Snapcraft CI/CD ([967bf7e](https://github.com/ghfetch/ghfetch/commit/967bf7e1b618ae92b493db0c1c3d862303147408))
+
+
+
 ## [1.5.12](https://github.com/ghfetch/ghfetch/compare/v1.5.11...v1.5.12) (2024-06-02)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * add sudo for lxd init ([41e7ac9](https://github.com/ghfetch/ghfetch/commit/41e7ac9a171294413ce0a809087ee16e5c2d30c1))
-
-
-
-## [1.5.8](https://github.com/ghfetch/ghfetch/compare/v1.5.7...v1.5.8) (2024-06-02)
-
-
-### Bug Fixes
-
-* add sudo for installing dependencies ([aa65b12](https://github.com/ghfetch/ghfetch/commit/aa65b12d770333a23db654089cce2e8cdea99b5d))
 
 
 
