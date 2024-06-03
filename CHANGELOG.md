@@ -1,3 +1,12 @@
+## [1.5.18](https://github.com/ghfetch/ghfetch/compare/v1.5.17...v1.5.18) (2024-06-03)
+
+
+### Bug Fixes
+
+* Move .dput.cf to home directory ([2dd3793](https://github.com/ghfetch/ghfetch/commit/2dd37936c5a05c7cee731e45e81092a81ccbf3a7))
+
+
+
 ## [1.5.17](https://github.com/ghfetch/ghfetch/compare/v1.5.16...v1.5.17) (2024-06-03)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Fix path to *_source.changes ([aee2069](https://github.com/ghfetch/ghfetch/commit/aee2069f505480c6a37fb7289a6bdd3e949c8e24))
-
-
-
-## [1.5.13](https://github.com/ghfetch/ghfetch/compare/v1.5.12...v1.5.13) (2024-06-03)
-
-
-### Bug Fixes
-
-* Use snapcore actions for Snapcraft CI/CD ([967bf7e](https://github.com/ghfetch/ghfetch/commit/967bf7e1b618ae92b493db0c1c3d862303147408))
 
 
 
