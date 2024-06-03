@@ -71,7 +71,7 @@ jobs:
 
     - name: Upload package to apt
       run: |
-        cp debian/.dput.cf .
+        cp debian/.dput.cf ../
         sudo chmod +x ../*_source.changes
         dput -f ghfetch-ppa ../*_source.changes
 
