@@ -1,3 +1,12 @@
+## [1.5.16](https://github.com/ghfetch/ghfetch/compare/v1.5.15...v1.5.16) (2024-06-03)
+
+
+### Bug Fixes
+
+* move current directory ([5e38268](https://github.com/ghfetch/ghfetch/commit/5e382681948950cff2b589c01a3e31776b9a7b03))
+
+
+
 ## [1.5.15](https://github.com/ghfetch/ghfetch/compare/v1.5.14...v1.5.15) (2024-06-03)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Add needed config for the CI/CD of snapcraft ([0793fde](https://github.com/ghfetch/ghfetch/commit/0793fde8b069cc5a70865af879b25ace0468da26))
-
-
-
-## [1.5.11](https://github.com/ghfetch/ghfetch/compare/v1.5.10...v1.5.11) (2024-06-02)
-
-
-### Bug Fixes
-
-* The order of the factors does not alter the product ([f958db8](https://github.com/ghfetch/ghfetch/commit/f958db8d222ba953ee5e16cff7fbd6cefe13795f))
 
 
 
