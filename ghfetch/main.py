@@ -1,6 +1,6 @@
 #!/bin/python3
 from json import load
-from sys import argv
+from argparse import ArgumentParser
 from requests import get
 from math import floor, ceil
 from pathlib import Path
@@ -18,22 +18,39 @@ LANGUAGES_BLOCK_CHAR = '\u2580'
 
 def startup():
     tmp_folder = Path(f'{HOME_PATH}/.ghfetch/tmp')
-
     Path(tmp_folder).mkdir(parents=True, exist_ok=True)
+
+def create_parser():
+    parser = ArgumentParser(
+        prog='ghfetch',
+        description='A nice way to display CLI Github user / repo / organization info inspired in neofetch',
+    )
+    parser.add_argument('target', help='the name of the user/org/repo to fetch', type=str)
+    parser.add_argument('-t', '--api-token', help='the GitHub API token', type=str)
+
+    # TODO: add version parameter, recursive display of repos and rate limit info
+    # parser.add_argument('-v', '--version', help='displays the current version of ghfetch', action='version', version='')
+    # parser.add_argument('-r', '--reverse', help='reverse the output of multiple repos', action='store_true')
+    # parser.add_argument('-l', '--limit', help='displays info about the rate limit', action='store_true')
+
+    global ARGS
+    ARGS = vars(parser.parse_args())
 
 async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
     ENDPOINT_URL = 'repos/' if is_repo else 'users/'
-
     URL = f'{BASE_URL}{ENDPOINT_URL}{name}'
+    API_TOKEN = ARGS['api_token']
+    HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
 
-    async with request('GET', URL) as res:
+    async with request(method='GET', url=URL, headers=HEADERS) as res:
         http_status = res.status
 
         if http_status != 200:
             return http_status
 
         content = await res.json()
+        print(res.headers)
         return content
 
 def api_rate_exceeded(code):
@@ -283,14 +300,12 @@ def print_output(fetched_info):
 
 def main():
     startup()
+    create_parser()
 
-    if len(argv) != 2:
-        return print('Only one argument must be provided')
-
-    name = argv[1]
+    target = ARGS['target']
 
     # API call
-    fetched_info = fetch_main(name)
+    fetched_info = fetch_main(target)
     if api_rate_exceeded(fetched_info):
         return
 
