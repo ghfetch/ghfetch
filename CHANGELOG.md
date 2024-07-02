@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/ghfetch/ghfetch/compare/v1.5.18...v1.6.0) (2024-07-02)
+
+
+### Features
+
+* change to argparse and add --api-token parameter ([3d41ec0](https://github.com/ghfetch/ghfetch/commit/3d41ec0464e164753b71b1aea5f3feaabb627cc6))
+
+
+
 ## [1.5.18](https://github.com/ghfetch/ghfetch/compare/v1.5.17...v1.5.18) (2024-06-03)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Change new path of .dput.cf ([2a9e32e](https://github.com/ghfetch/ghfetch/commit/2a9e32e9be8c7273503c53304fced463394fdd41))
-
-
-
-## [1.5.14](https://github.com/ghfetch/ghfetch/compare/v1.5.13...v1.5.14) (2024-06-03)
-
-
-### Bug Fixes
-
-* Fix path to *_source.changes ([aee2069](https://github.com/ghfetch/ghfetch/commit/aee2069f505480c6a37fb7289a6bdd3e949c8e24))
 
 
 
