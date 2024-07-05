@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/ghfetch/ghfetch/compare/v1.6.1...v1.7.0) (2024-07-05)
+
+
+### Features
+
+* add multiple targets in single execution ([ff8bf99](https://github.com/ghfetch/ghfetch/commit/ff8bf99aa0feb9766b54eb1ead78358181ea994d))
+
+
+
 ## [1.6.1](https://github.com/ghfetch/ghfetch/compare/v1.6.0...v1.6.1) (2024-07-05)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Add reading permissions to .dput.cf ([3dc0567](https://github.com/ghfetch/ghfetch/commit/3dc0567d83749061090cc9fbd29cc81211b0fece))
-
-
-
-## [1.5.16](https://github.com/ghfetch/ghfetch/compare/v1.5.15...v1.5.16) (2024-06-03)
-
-
-### Bug Fixes
-
-* move current directory ([5e38268](https://github.com/ghfetch/ghfetch/commit/5e382681948950cff2b589c01a3e31776b9a7b03))
 
 
 
