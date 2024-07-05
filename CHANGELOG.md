@@ -1,3 +1,12 @@
+## [1.6.1](https://github.com/ghfetch/ghfetch/compare/v1.6.0...v1.6.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* remove print ([f2fab62](https://github.com/ghfetch/ghfetch/commit/f2fab62218e17827e3823a36118141dba9b2a65d))
+
+
+
 # [1.6.0](https://github.com/ghfetch/ghfetch/compare/v1.5.18...v1.6.0) (2024-07-02)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * move current directory ([5e38268](https://github.com/ghfetch/ghfetch/commit/5e382681948950cff2b589c01a3e31776b9a7b03))
-
-
-
-## [1.5.15](https://github.com/ghfetch/ghfetch/compare/v1.5.14...v1.5.15) (2024-06-03)
-
-
-### Bug Fixes
-
-* Change new path of .dput.cf ([2a9e32e](https://github.com/ghfetch/ghfetch/commit/2a9e32e9be8c7273503c53304fced463394fdd41))
 
 
 
