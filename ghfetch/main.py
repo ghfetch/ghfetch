@@ -50,7 +50,6 @@ async def api_call(is_repo, name):
             return http_status
 
         content = await res.json()
-        print(res.headers)
         return content
 
 def api_rate_exceeded(code):
