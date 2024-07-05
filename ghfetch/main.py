@@ -15,6 +15,14 @@ HOME_PATH = Path().home()
 THIS_PATH = Path(__file__).resolve().parent.resolve()
 UNICODE_BLOCK_CHAR = '\u2588'
 LANGUAGES_BLOCK_CHAR = '\u2580'
+PARSER_ERRORS = {
+    'missing_target': 'At least one target must be provided',
+}
+HTTP_ERRORS = {
+    401: "You don't have access to this resource",
+    403: "This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee \u2615",
+    404: "The passed parameter it's not an existing User / Company / repo",
+}
 
 def startup():
     tmp_folder = Path(f'{HOME_PATH}/.ghfetch/tmp')
@@ -25,7 +33,7 @@ def create_parser():
         prog='ghfetch',
         description='A nice way to display CLI Github user / repo / organization info inspired in neofetch',
     )
-    parser.add_argument('target', help='the name of the user/org/repo to fetch', type=str)
+    parser.add_argument('target', help='the name of the user/org/repo to fetch', type=str, nargs='*')
     parser.add_argument('-t', '--api-token', help='the GitHub API token', type=str)
 
     # TODO: add version parameter, recursive display of repos and rate limit info
@@ -35,6 +43,8 @@ def create_parser():
 
     global ARGS
     ARGS = vars(parser.parse_args())
+
+    return parser
 
 async def api_call(is_repo, name):
     BASE_URL = 'https://api.github.com/'
@@ -56,27 +66,29 @@ def api_rate_exceeded(code):
     if not isinstance(code, int):
         return False
 
-    if code == 401:
-        print("You don't have access to this")
-    if code == 403:
-        print("This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee \u2615")
-    if code == 404:
-        print("The passed parameter it's not an existing User / Company / repo")
+    print(HTTP_ERRORS[code])
 
     return True
 
-def get_commits_number(owner, repo):
+async def get_commits_number(owner, repo):
     URL = f"https://api.github.com/repos/{owner}/{repo}/commits?per_page=1"
-    response = get(URL)
+    API_TOKEN = ARGS['api_token']
+    HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
 
-    if response.status_code != 200:
-        return response.status_code
+    async with request('GET', url=URL, headers=HEADERS) as res:
+        http_status = res.status
 
-    commits = response.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
-    return {'commits': commits,}
+        if http_status != 200:
+            return http_status
+
+        commits = res.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
+        return {'commits': commits,}
 
 async def create_languages_stat(url):
-    async with request('GET', url) as res:
+    API_TOKEN = ARGS['api_token']
+    HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
+
+    async with request('GET', url, headers=HEADERS) as res:
         http_status = res.status
 
         if http_status != 200:
@@ -112,7 +124,7 @@ def fetch_main(name):
 
     info = run(api_call(is_repo, name))
 
-    if info in (401, 403, 404):
+    if isinstance(info, int):
         return info
 
     generic_info = {
@@ -136,8 +148,8 @@ def fetch_main(name):
         return {k:v if v != '' else None for k, v in dict.items()}
 
     if is_repo:
-        commits = get_commits_number(*name.split('/'))
-        if commits in (401, 403, 404):
+        commits = run(get_commits_number(*name.split('/')))
+        if isinstance(commits, int):
             return commits
 
         return correct_formatting(generic_info | fetch_repo(info)) | commits
@@ -299,16 +311,20 @@ def print_output(fetched_info):
 
 def main():
     startup()
-    create_parser()
+    parser = create_parser()
 
     target = ARGS['target']
 
-    # API call
-    fetched_info = fetch_main(target)
-    if api_rate_exceeded(fetched_info):
-        return
+    if len(target) < 1:
+        parser.error(PARSER_ERRORS['missing_target'])
 
-    print_output(fetched_info)
+    # API call
+    for t in target:
+        fetched_info = fetch_main(t)
+        if api_rate_exceeded(fetched_info):
+            return
+
+        print_output(fetched_info)
 
 if __name__ == '__main__':
     main()
