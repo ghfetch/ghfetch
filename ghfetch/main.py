@@ -84,6 +84,20 @@ async def get_commits_number(owner, repo):
         commits = res.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
         return {'commits': commits,}
 
+async def get_repos_number(user):
+    URL = f"https://api.github.com/users/{user}/repos?per_page=1"
+    API_TOKEN = ARGS['api_token']
+    HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
+
+    async with request('GET', url=URL, headers=HEADERS) as res:
+        http_status = res.status
+
+        if http_status != 200:
+            return http_status
+
+        repos = res.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
+        return int(repos)
+
 async def create_languages_stat(url):
     API_TOKEN = ARGS['api_token']
     HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
