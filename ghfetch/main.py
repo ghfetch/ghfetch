@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 from requests import get
 from math import floor, ceil
 from pathlib import Path
+from re import search, sub
 
 # requirements
 from asyncio import run
@@ -97,6 +98,38 @@ async def get_repos_number(user):
 
         repos = res.headers['Link'].split(';')[1].split(',')[1].split('=')[2][:-1]
         return int(repos)
+
+async def get_repos(user, url=None):
+    repos = []
+
+    if url == None:
+        url = f"https://api.github.com/users/{user}/repos?type=public&per_page=100"
+
+    API_TOKEN = ARGS['api_token']
+    HEADERS = { 'Authorization': f'Bearer {API_TOKEN}', } if API_TOKEN else {}
+
+    async with request('GET', url=url, headers=HEADERS) as res:
+        http_status = res.status
+
+        if http_status != 200:
+            return http_status
+
+        content = await res.json()
+        # print(content)
+        for repo in content:
+            repos.append(repo["full_name"])
+
+        if "Link" in res.headers and search(r'; rel="next"', res.headers['Link']):
+            url = sub(r'.*<(.*)>; rel="next".*', r'\1', res.headers['Link'])
+
+            repos_continuation = await get_repos(user, url=url)
+
+            if isinstance(repos_continuation, int):
+                return repos_continuation
+
+            repos.extend(repos_continuation)
+
+        return repos
 
 async def create_languages_stat(url):
     API_TOKEN = ARGS['api_token']
@@ -334,11 +367,25 @@ def main():
 
     # API call
     for t in target:
-        fetched_info = fetch_main(t)
-        if api_rate_exceeded(fetched_info):
-            return
+        if t.endswith("/*"):
+            repos = run(get_repos(t.split("/")[0]))
 
-        print_output(fetched_info)
+            if api_rate_exceeded(repos):
+                return
+
+            for repo in repos:
+                fetched_info = fetch_main(repo)
+                if api_rate_exceeded(fetched_info):
+                    return
+
+                print_output(fetched_info)
+
+        else:
+            fetched_info = fetch_main(t)
+            if api_rate_exceeded(fetched_info):
+                return
+
+            print_output(fetched_info)
 
 if __name__ == '__main__':
     main()
