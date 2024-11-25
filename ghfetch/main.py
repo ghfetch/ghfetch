@@ -16,6 +16,7 @@ HOME_PATH = Path().home()
 THIS_PATH = Path(__file__).resolve().parent.resolve()
 UNICODE_BLOCK_CHAR = '\u2588'
 LANGUAGES_BLOCK_CHAR = '\u2580'
+RESULTS_LIMIT = 5
 PARSER_ERRORS = {
     'missing_target': 'At least one target must be provided',
 }
@@ -23,6 +24,9 @@ HTTP_ERRORS = {
     401: "You don't have access to this resource",
     403: "This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee \u2615",
     404: "The passed parameter it's not an existing User / Company / repo",
+}
+MESSAGES_TO_USER = {
+    'over_results_limit': 'This command will print a total of {} repositories, this will consume a lot of your api credits and even may consume it all without being able to print everything. Do you want to execute it anyway? (y/N) '
 }
 
 def startup():
@@ -368,6 +372,11 @@ def main():
     # API call
     for t in target:
         if t.endswith("/*"):
+            repos_number =  run(get_repos_number(t.split("/")[0]))
+
+            if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
+                return
+
             repos = run(get_repos(t.split("/")[0]))
 
             if api_rate_exceeded(repos):
