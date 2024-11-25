@@ -40,6 +40,7 @@ def create_parser():
     )
     parser.add_argument('target', help='the name of the user/org/repo to fetch', type=str, nargs='*')
     parser.add_argument('-t', '--api-token', help='the GitHub API token', type=str)
+    parser.add_argument('-y', '--skip', help='Automatically accept every confirmation', action='store_true')
 
     # TODO: add version parameter, recursive display of repos and rate limit info
     # parser.add_argument('-v', '--version', help='displays the current version of ghfetch', action='version', version='')
@@ -372,10 +373,11 @@ def main():
     # API call
     for t in target:
         if t.endswith("/*"):
-            repos_number =  run(get_repos_number(t.split("/")[0]))
+            if not ARGS['skip']:
+                repos_number =  run(get_repos_number(t.split("/")[0]))
 
-            if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
-                return
+                if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
+                    return
 
             repos = run(get_repos(t.split("/")[0]))
 
