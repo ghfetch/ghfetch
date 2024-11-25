@@ -331,10 +331,13 @@ def print_output(fetched_info):
         output[n + 10] += f'{title("Github URL")}: {text(fetched_info["github_url"])}'
 
         def get_lang_color(dict, lang):
-            return (
-                dict.get(lang)
-                    .get('color') or COLOR_TEXT
-            )
+            try:
+                return (
+                    dict.get(lang)
+                        .get('color') or COLOR_TEXT
+                )
+            except:
+                return COLOR_TEXT
 
         with open(Path(f'{THIS_PATH}/data/language-colors.json'), 'r') as languages:
             languages = load(languages)
