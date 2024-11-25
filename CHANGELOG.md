@@ -1,3 +1,12 @@
+## [1.8.1](https://github.com/ghfetch/ghfetch/compare/v1.8.0...v1.8.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* update to noble ([a92f018](https://github.com/ghfetch/ghfetch/commit/a92f018e5ece35e55487456096b70504f5e4ad14))
+
+
+
 # [1.8.0](https://github.com/ghfetch/ghfetch/compare/v1.7.0...v1.8.0) (2024-11-25)
 
 
@@ -40,15 +49,6 @@
 ### Features
 
 * change to argparse and add --api-token parameter ([3d41ec0](https://github.com/ghfetch/ghfetch/commit/3d41ec0464e164753b71b1aea5f3feaabb627cc6))
-
-
-
-## [1.5.18](https://github.com/ghfetch/ghfetch/compare/v1.5.17...v1.5.18) (2024-06-03)
-
-
-### Bug Fixes
-
-* Move .dput.cf to home directory ([2dd3793](https://github.com/ghfetch/ghfetch/commit/2dd37936c5a05c7cee731e45e81092a81ccbf3a7))
 
 
 
