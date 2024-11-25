@@ -5,6 +5,7 @@ from requests import get
 from math import floor, ceil
 from pathlib import Path
 from re import search, sub
+from time import sleep
 
 # requirements
 from asyncio import run
@@ -24,6 +25,8 @@ HTTP_ERRORS = {
     401: "You don't have access to this resource",
     403: "This works through the Github API and looks like you've reached the hourly limit.\nTake advantage of this and go to make yourself a cup of coffee \u2615",
     404: "The passed parameter it's not an existing User / Company / repo",
+    408: "Time out. Please try again later",
+    409: "Conflict. This happends randomly with Github API, please try again later",
 }
 MESSAGES_TO_USER = {
     'over_results_limit': 'This command will print a total of {} repositories, this will consume a lot of your api credits and even may consume it all without being able to print everything. Do you want to execute it anyway? (y/N) '
@@ -177,6 +180,10 @@ def fetch_main(name):
     info = run(api_call(is_repo, name))
 
     if isinstance(info, int):
+        if info == 409:
+            sleep(2)
+            return fetch_main(name)
+
         return info
 
     generic_info = {
@@ -374,32 +381,35 @@ def main():
         parser.error(PARSER_ERRORS['missing_target'])
 
     # API call
-    for t in target:
-        if t.endswith("/*"):
-            if not ARGS['skip']:
-                repos_number =  run(get_repos_number(t.split("/")[0]))
+    try:
+        for t in target:
+            if t.endswith("/*"):
+                if not ARGS['skip']:
+                    repos_number =  run(get_repos_number(t.split("/")[0]))
 
-                if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
+                    if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
+                        return
+
+                repos = run(get_repos(t.split("/")[0]))
+
+                if api_rate_exceeded(repos):
                     return
 
-            repos = run(get_repos(t.split("/")[0]))
+                for repo in repos:
+                    fetched_info = fetch_main(repo)
+                    if api_rate_exceeded(fetched_info):
+                        return
 
-            if api_rate_exceeded(repos):
-                return
+                    print_output(fetched_info)
 
-            for repo in repos:
-                fetched_info = fetch_main(repo)
+            else:
+                fetched_info = fetch_main(t)
                 if api_rate_exceeded(fetched_info):
                     return
 
                 print_output(fetched_info)
-
-        else:
-            fetched_info = fetch_main(t)
-            if api_rate_exceeded(fetched_info):
-                return
-
-            print_output(fetched_info)
+    except TimeoutError:
+        print(HTTP_ERRORS[408])
 
 if __name__ == '__main__':
     main()
