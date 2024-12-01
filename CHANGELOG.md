@@ -1,3 +1,12 @@
+# [1.9.0](https://github.com/ghfetch/ghfetch/compare/v1.8.1...v1.9.0) (2024-12-01)
+
+
+### Features
+
+* force version update ([dd08245](https://github.com/ghfetch/ghfetch/commit/dd082450a1901dca63868f6d854913b45c645bb9))
+
+
+
 ## [1.8.1](https://github.com/ghfetch/ghfetch/compare/v1.8.0...v1.8.1) (2024-11-25)
 
 
@@ -40,15 +49,6 @@
 ### Bug Fixes
 
 * remove print ([f2fab62](https://github.com/ghfetch/ghfetch/commit/f2fab62218e17827e3823a36118141dba9b2a65d))
-
-
-
-# [1.6.0](https://github.com/ghfetch/ghfetch/compare/v1.5.18...v1.6.0) (2024-07-02)
-
-
-### Features
-
-* change to argparse and add --api-token parameter ([3d41ec0](https://github.com/ghfetch/ghfetch/commit/3d41ec0464e164753b71b1aea5f3feaabb627cc6))
 
 
 
