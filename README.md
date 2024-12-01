@@ -121,7 +121,6 @@ ghfetch ghfetch/ghfetch
 If you are installing ghfetch using PIP, and you get a similar warning to this:</br>
 ![path_warn_preview](https://github.com/ghfetch/ghfetch/assets/90156486/11501fd4-9d46-4880-ae8d-2f750ccd8574)
 
-
 The solution is to add `export PATH=/home/user/.local/bin:$PATH` to your .bashrc, where `/home/user/.local/bin` would be the path that the warning is telling you, and reboot.
 
 ### Updating ghfetch using yay doesn't update it
