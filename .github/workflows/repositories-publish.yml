@@ -48,7 +48,7 @@ jobs:
       shell: bash
       env:
         PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      run: twine upload -u ghfetch -p "$PYPI_PASSWORD" dist/*
+      run: twine upload -u __token__ -p "$PYPI_PASSWORD" dist/*
 
 # Section for apt
     - name: Import GPG key
