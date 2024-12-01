@@ -43,6 +43,7 @@ def create_parser():
     )
     parser.add_argument('target', help='the name of the user/org/repo to fetch', type=str, nargs='*')
     parser.add_argument('-t', '--api-token', help='the GitHub API token', type=str)
+    parser.add_argument('-x', '--execute', help='Automatically print every repo fetched', action='store_true')
     parser.add_argument('-y', '--skip', help='Automatically accept every confirmation', action='store_true')
 
     # TODO: add version parameter, recursive display of repos and rate limit info
@@ -384,23 +385,32 @@ def main():
     try:
         for t in target:
             if t.endswith("/*"):
-                if not ARGS['skip']:
-                    repos_number =  run(get_repos_number(t.split("/")[0]))
+                if ARGS['execute']:
+                    if not ARGS['skip']:
+                        repos_number =  run(get_repos_number(t.split("/")[0]))
 
-                    if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
-                        return
+                        if repos_number > RESULTS_LIMIT and input(MESSAGES_TO_USER["over_results_limit"].format(repos_number)).lower() != "y":
+                            return
 
-                repos = run(get_repos(t.split("/")[0]))
+                    repos = run(get_repos(t.split("/")[0]))
 
-                if api_rate_exceeded(repos):
-                    return
+                    if api_rate_exceeded(repos):
+                        return repos
 
-                for repo in repos:
-                    fetched_info = fetch_main(repo)
-                    if api_rate_exceeded(fetched_info):
-                        return
+                    for repo in repos:
+                        fetched_info = fetch_main(repo)
+                        if api_rate_exceeded(fetched_info):
+                            return
 
-                    print_output(fetched_info)
+                        print_output(fetched_info)
+                else:
+                    repos = run(get_repos(t.split("/")[0]))
+
+                    if api_rate_exceeded(repos):
+                        return repos
+
+                    for repo in repos:
+                        Console().print(repo, overflow='crop', soft_wrap=True)
 
             else:
                 fetched_info = fetch_main(t)
