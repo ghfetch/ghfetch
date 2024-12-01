@@ -1,3 +1,12 @@
+## [1.9.1](https://github.com/ghfetch/ghfetch/compare/v1.9.0...v1.9.1) (2024-12-01)
+
+
+### Bug Fixes
+
+* pip upload with token ([44ab9a6](https://github.com/ghfetch/ghfetch/commit/44ab9a6e04e12798597b59e0fd00fac792e466dc))
+
+
+
 # [1.9.0](https://github.com/ghfetch/ghfetch/compare/v1.8.1...v1.9.0) (2024-12-01)
 
 
@@ -40,15 +49,6 @@
 ### Features
 
 * add multiple targets in single execution ([ff8bf99](https://github.com/ghfetch/ghfetch/commit/ff8bf99aa0feb9766b54eb1ead78358181ea994d))
-
-
-
-## [1.6.1](https://github.com/ghfetch/ghfetch/compare/v1.6.0...v1.6.1) (2024-07-05)
-
-
-### Bug Fixes
-
-* remove print ([f2fab62](https://github.com/ghfetch/ghfetch/commit/f2fab62218e17827e3823a36118141dba9b2a65d))
 
 
 
